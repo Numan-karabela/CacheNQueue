@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CacheNQueue.Domain\CacheNQueue.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
