@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CacheNQueue.Domain.Entities
 {
-    public class Product : BaseEntity//sipariş
+    public class Product : BaseEntity//Ürün
     {
         public string Name { get; set; } // Ürün adı 
         public string Description { get; set; } // Ürün açıklaması  

@@ -19,7 +19,7 @@ namespace CacheNQueue.Persistence.Context
 
         public DbSet<Product> Products { get; set; } // Ürünler tablosu
         public DbSet<Order> Orders { get; set; } // Siparişler tablosu
-        public DbSet<OrderItem> OrderItems { get; set; } // Sipariş detayları tablosu
-         
+        public DbSet<OrderItem> OrderItems { get; set; } // Sipariş detayları tablosu 
+
     }
 }

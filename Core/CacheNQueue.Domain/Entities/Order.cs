@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CacheNQueue.Domain.Entities
 {
-    public class Order : BaseEntity
+    public class Order : BaseEntity//sipariş
     {
         public Guid UserId { get; set; } // Kullanıcı kimlik numarası  
         public string OrderStatus { get; set; } // Sipariş durumu 
