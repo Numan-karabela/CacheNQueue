@@ -1,4 +1,8 @@
-﻿using CacheNQueue.Domain.Entities.Identity;
+﻿using CacheNQueue.Application.Repositories.OrderItemsRepository;
+using CacheNQueue.Application.Repositories.OrderRepository;
+using CacheNQueue.Application.Repositories.ProductRepository;
+using CacheNQueue.Domain.Entities;
+using CacheNQueue.Domain.Entities.Identity;
 using CacheNQueue.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -16,6 +20,9 @@ namespace CacheNQueue.Persistence
         public static void AddPersistanceService(this IServiceCollection service, IConfiguration configuration)
         {
             service.AddDbContext<CacheNQueueDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("sql")));
+            service.AddScoped<IOrderItemRepository, OrderItemRepository>();
+            service.AddScoped<IOrderRepository, OrderRepository>();
+            service.AddScoped<IProductRepository, ProductRepository>();
             service.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<CacheNQueueDbContext>();
 
         }

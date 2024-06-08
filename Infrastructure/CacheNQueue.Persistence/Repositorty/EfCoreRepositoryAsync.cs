@@ -1,5 +1,6 @@
 ﻿using CacheNQueue.Application.Repositories;
 using CacheNQueue.Domain.Entities.Comman;
+using CacheNQueue.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,11 +11,11 @@ using System.Threading.Tasks;
 
 namespace CacheNQueue.Persistence.Repositorty
 {
-    public class EfCoreRepositoryAsync<T> : IRepositoryAsync<T> where T :BaseEntity, new()
+    public class EfCoreRepositoryAsync<T> : IRepositoryAsync<T> where T :BaseEntity 
     {
-        protected readonly DbContext _context;
+        protected readonly CacheNQueueDbContext _context;
 
-        public EfCoreRepositoryAsync(DbContext context)
+        public EfCoreRepositoryAsync(CacheNQueueDbContext context)
         {
             _context = context;
         }

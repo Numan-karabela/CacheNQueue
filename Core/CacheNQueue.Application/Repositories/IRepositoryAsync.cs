@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CacheNQueue.Application.Repositories
 {
-    public interface IRepositoryAsync<T> where T : BaseEntity, new()
+    public interface IRepositoryAsync<T> where T : BaseEntity
     {
         Task<T> GetByIdAsync(Guid id);
         Task<IEnumerable<T>> GetAllAsync();

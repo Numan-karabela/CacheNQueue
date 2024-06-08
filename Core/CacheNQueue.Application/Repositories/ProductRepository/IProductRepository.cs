@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CacheNQueue.Application.Repositories.ProductRepository
 {
-      public interface IPoductRepository:IRepositoryAsync<Product> 
+      public interface IProductRepository:IRepositoryAsync<Product>
     {
     }
 }

@@ -5,9 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CacheNQueue.Application.Repositories.OrderItemsRepository
+namespace CacheNQueue.Application.Med.ProductMed.Add
 {
-    public interface IOrderItemRepository:IRepositoryAsync<OrderItem> 
+    public class ProductCommandResponse
     {
+        public Product Product;
     }
 }
