@@ -30,10 +30,7 @@ namespace CacheNQueue.Persistence.Repositorty
             return await _context.Set<T>().ToListAsync();
         }
 
-        public async Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> predicate)
-        {
-            return await _context.Set<T>().Where(predicate).ToListAsync();
-        }
+         
 
         public async Task AddAsync(T entity)
         {
@@ -59,10 +56,6 @@ namespace CacheNQueue.Persistence.Repositorty
             _context.SaveChanges();
         }
 
-        public void RemoveRange(IEnumerable<T> entities)
-        {
-            _context.Set<T>().RemoveRange(entities);
-            _context.SaveChanges();
-        }
+        
     }
 }

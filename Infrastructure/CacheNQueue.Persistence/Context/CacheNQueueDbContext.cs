@@ -13,7 +13,8 @@ namespace CacheNQueue.Persistence.Context
 {
     public class CacheNQueueDbContext:IdentityDbContext<AppUser,AppRole,string>
     {
-        public CacheNQueueDbContext(DbContextOptions options) : base(options)
+         
+        public CacheNQueueDbContext(DbContextOptions<CacheNQueueDbContext> options) : base(options)
         {
         }
 

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CacheNQueue.Application.Med.ProductMed.Add
 {
-    public class ProductCommandHandler : IRequestHandler<ProductCommandReques, ProductCommandResponse>
+    public class ProductCommandHandler : IRequestHandler<ProductAddCommandReques, ProductAddCommandResponse>
     {   readonly IProductRepository productRepository;
 
         public ProductCommandHandler(IProductRepository productRepository)
@@ -16,7 +16,7 @@ namespace CacheNQueue.Application.Med.ProductMed.Add
             this.productRepository = productRepository;
         }
 
-        public async Task<ProductCommandResponse> Handle(ProductCommandReques request, CancellationToken cancellationToken)
+        public async Task<ProductAddCommandResponse> Handle(ProductAddCommandReques request, CancellationToken cancellationToken)
         {
            await productRepository.AddAsync(new()
             {

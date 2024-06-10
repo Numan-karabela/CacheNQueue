@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 
 namespace CacheNQueue.Application.Med.ProductMed.Add
 {
-    public class ProductCommandResponse
-    {
-        public Product Product;
+    public class ProductAddCommandResponse
+    { 
     }
 }

@@ -7,6 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.0.1" />
     <PackageReference Include="MediatR" Version="10.0.0" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
   </ItemGroup>
@@ -18,6 +20,10 @@
   <ItemGroup>
     <Folder Include="Med\OrderItemsMed\" />
     <Folder Include="Med\OrderMed\" />
+    <Folder Include="Med\ProductMed\Delete\" />
+    <Folder Include="Med\ProductMed\GetAll\" />
+    <Folder Include="Med\ProductMed\GetById\" />
+    <Folder Include="Med\ProductMed\Update\" />
   </ItemGroup>
 
 </Project>

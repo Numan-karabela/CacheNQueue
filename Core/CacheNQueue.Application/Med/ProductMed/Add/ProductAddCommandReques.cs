@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CacheNQueue.Application.Med.ProductMed.Add
 {
-    public class ProductCommandReques:IRequest<ProductCommandResponse>
+    public class ProductAddCommandReques:IRequest<ProductAddCommandResponse>
     {
         public string Name { get; set; } // Ürün adı 
         public string Description { get; set; } // Ürün açıklaması  

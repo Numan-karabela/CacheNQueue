@@ -1,8 +1,10 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,9 +14,11 @@ namespace CacheNQueue.Application
     {
         public static void AddAplicationService(this IServiceCollection services )
         {
-            services.AddMediatR(typeof(ServiceRegistrations));  
+            var assm=Assembly.GetExecutingAssembly();
+            services.AddMediatR(assm);
+            //services.AddAutoMapper(assm);
+
+
         }
-
-
     }
 }

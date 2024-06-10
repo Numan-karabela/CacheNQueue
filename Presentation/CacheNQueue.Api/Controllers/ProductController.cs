@@ -17,9 +17,9 @@ namespace CacheNQueue.Api.Controllers
             this.mediator = mediator;
         }
         [HttpPut]
-        public async Task<IActionResult>Add(ProductCommandReques reques)
+        public async Task<IActionResult>Add(ProductAddCommandReques reques)
         {
-          ProductCommandResponse response= await mediator.Send(reques);
+          ProductAddCommandResponse response= await mediator.Send(reques);
             return Ok(response);
 
         }
