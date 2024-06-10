@@ -25,7 +25,7 @@ namespace CacheNQueue.Persistence.Repositorty
             return await _context.Set<T>().FindAsync(id);
         }
 
-        public async Task<IEnumerable<T>> GetAllAsync()
+        public async Task<List<T>> GetAllAsync()
         {
             return await _context.Set<T>().ToListAsync();
         }
@@ -38,24 +38,24 @@ namespace CacheNQueue.Persistence.Repositorty
             await _context.SaveChangesAsync();
         }
 
-        public async Task AddRangeAsync(IEnumerable<T> entities)
+        public async Task AddRangeAsync(List<T> entities)
         {
             await _context.Set<T>().AddRangeAsync(entities);
             await _context.SaveChangesAsync();
         }
 
-        public void Update(T entity)
+        public async Task Update(T entity)
         {
             _context.Set<T>().Update(entity);
             _context.SaveChanges();
         }
 
-        public void Remove(T entity)
+        public async Task Remove(T entity)
         {
             _context.Set<T>().Remove(entity);
             _context.SaveChanges();
         }
 
-        
+         
     }
 }

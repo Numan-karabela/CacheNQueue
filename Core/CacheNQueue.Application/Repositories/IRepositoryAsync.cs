@@ -11,14 +11,13 @@ namespace CacheNQueue.Application.Repositories
     public interface IRepositoryAsync<T> where T : BaseEntity
     {
         Task<T> GetByIdAsync(Guid id);
-        Task<IEnumerable<T>> GetAllAsync(); 
+        Task<List<T>> GetAllAsync(); 
 
-        Task AddAsync(T entity);
-        Task AddRangeAsync(IEnumerable<T> entities);
+        Task AddAsync(T entity); 
 
-        void Update(T entity);
+        Task Update(T entity);
 
-        void Remove(T entity); 
+        Task Remove(T entity); 
     }
 }
 

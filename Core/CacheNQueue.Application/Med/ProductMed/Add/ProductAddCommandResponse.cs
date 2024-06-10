@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 namespace CacheNQueue.Application.Med.ProductMed.Add
 {
     public class ProductAddCommandResponse
-    { 
+    {
+        public string Message { get; set; }
     }
 }
