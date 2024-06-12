@@ -21,6 +21,7 @@ namespace CacheNQueue.Application.Med.ProductMed.Update
         public async Task<ProductUpdateCommandResponse> Handle(ProductUpdateCommandRequest request, CancellationToken cancellationToken)
         {
            Product product= ProductUpdateCommandRequest.MapToProduct(request);
+
            await _productRepository.Update(product);
              
 

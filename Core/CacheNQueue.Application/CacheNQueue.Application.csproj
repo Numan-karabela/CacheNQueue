@@ -20,7 +20,6 @@
   <ItemGroup>
     <Folder Include="Med\OrderItemsMed\" />
     <Folder Include="Med\OrderMed\" />
-    <Folder Include="Med\ProductMed\GetById\" />
   </ItemGroup>
 
 </Project>

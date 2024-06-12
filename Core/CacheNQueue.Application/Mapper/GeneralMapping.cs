@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using CacheNQueue.Application.Med.ProductMed.Add;
 using CacheNQueue.Application.Med.ProductMed.GetAll;
+using CacheNQueue.Application.Med.ProductMed.GetById;
 using CacheNQueue.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,7 @@ namespace CacheNQueue.Application.Mapper
         public GeneralMapping()
         {
             CreateMap<Product,ProductGettAllQueryResponse>().ReverseMap();
-            //CreateMap<Product, ProductAddCommandReques>().ReverseMap();
+            CreateMap<Product,ProductGetByIdQueryResponse>().ReverseMap();
 
         }
     }
