@@ -24,7 +24,10 @@ namespace CacheNQueue.Application.Med.ProductMed.Update
            await _productRepository.Update(product);
              
 
-            return new();
+            return new()
+            {
+                Message="başarılı"
+            };
         }
     }
 }

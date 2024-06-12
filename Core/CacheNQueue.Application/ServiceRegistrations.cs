@@ -15,7 +15,8 @@ namespace CacheNQueue.Application
         public static void AddAplicationService(this IServiceCollection services )
         {
             var assm=Assembly.GetExecutingAssembly();
-            services.AddMediatR(assm); 
+            services.AddMediatR(assm);
+            services.AddAutoMapper(assm);
 
 
         }

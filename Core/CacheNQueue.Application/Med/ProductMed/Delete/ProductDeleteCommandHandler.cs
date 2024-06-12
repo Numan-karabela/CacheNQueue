@@ -26,7 +26,10 @@ namespace CacheNQueue.Application.Med.ProductMed.Delete
            await _productRepository.Remove(product);
 
 
-            return new();
+            return new()
+            {
+                 Message="Başarılı"
+            };
         }
     }
 }

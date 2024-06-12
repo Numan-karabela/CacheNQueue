@@ -9,6 +9,6 @@ namespace CacheNQueue.Application.Med.ProductMed.Add
 {
     public class ProductAddCommandResponse
     {
-        public string Message { get; set; }
+        public string Message { get; set; }  
     }
 }

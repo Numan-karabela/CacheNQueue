@@ -10,12 +10,13 @@ namespace CacheNQueue.Application.Med.ProductMed.GetAll
 {
     public class ProductGettAllQueryResponse
     {
-        public string Name { get; set; } // Ürün adı 
-        public string Description { get; set; } // Ürün açıklaması  
-        public decimal Price { get; set; } // Ürün fiyatı 
-        public int Stock { get; set; } // Stok miktarı 
+        public Guid Id { get; set; }
+        public string Name { get; set; }   
+        public string Description { get; set; }    
+        public decimal Price { get; set; }  
+        public int Stock { get; set; }  
       
-
+    
 
     }
 }

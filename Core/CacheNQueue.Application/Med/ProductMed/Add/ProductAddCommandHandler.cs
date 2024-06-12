@@ -11,19 +11,25 @@ using System.Threading.Tasks;
 namespace CacheNQueue.Application.Med.ProductMed.Add
 {
     public class ProductCommandHandler : IRequestHandler<ProductAddCommandReques, ProductAddCommandResponse>
-    {   readonly IProductRepository productRepository; 
-        public ProductCommandHandler(IProductRepository productRepository)
+    {   readonly IProductRepository productRepository;
+        readonly IMapper mapper;
+        public ProductCommandHandler(IProductRepository productRepository, IMapper mapper)
         {
-            this.productRepository = productRepository; 
+            this.productRepository = productRepository;
+            this.mapper = mapper;
         }
 
         public async Task<ProductAddCommandResponse> Handle(ProductAddCommandReques request, CancellationToken cancellationToken)
         {
-             var product= ProductAddCommandReques.MapToProduct(request);
+              
+             var product= ProductAddCommandReques.MapToProduct(request); 
              await productRepository.AddAsync(product);
+            
 
-             return new();
-
+            return new()
+            {
+             Message="Başarılı"
+            };
         }
     }
 }
