@@ -1,4 +1,5 @@
 ﻿using CacheNQueue.Application.Med.ProductMed.Add;
+using CacheNQueue.Application.Med.ProductMed.GetById;
 using CacheNQueue.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -14,10 +15,21 @@ namespace CacheNQueue.Application.Med.ProductMed.GetAll
         public string Name { get; set; }   
         public string Description { get; set; }    
         public decimal Price { get; set; }  
-        public int Stock { get; set; }  
-      
-       
-         
+        public int Stock { get; set; }
+
+        public static ProductGettAllQueryResponse Map(Product product)
+        {
+            return new ProductGettAllQueryResponse()
+            {
+                Name = product.Name,
+                Description = product.Description,
+                Price = product.Price,
+                Stock = product.Stock,
+
+            }; 
+
+        }
+
 
     }
 }

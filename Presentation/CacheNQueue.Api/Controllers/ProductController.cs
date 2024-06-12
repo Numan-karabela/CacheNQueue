@@ -7,6 +7,7 @@ using CacheNQueue.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Distributed;
 
 namespace CacheNQueue.Api.Controllers
 {
@@ -15,10 +16,12 @@ namespace CacheNQueue.Api.Controllers
     public class ProductController : ControllerBase
     {
         readonly IMediator mediator;
+        readonly IDistributedCache _distributedCache;
 
-        public ProductController(IMediator mediator)
+        public ProductController(IMediator mediator, IDistributedCache distributedCache = null)
         {
             this.mediator = mediator;
+            _distributedCache = distributedCache;
         }
         [HttpPut]
         public async Task<IActionResult>Add(ProductAddCommandReques reques)

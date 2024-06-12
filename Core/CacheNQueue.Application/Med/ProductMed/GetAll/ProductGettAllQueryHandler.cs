@@ -15,20 +15,18 @@ namespace CacheNQueue.Application.Med.ProductMed.GetAll
     public class ProductGettAllQueryHandler : IRequestHandler<ProductGettAllQueryRequest,List<ProductGettAllQueryResponse>>
     {
         readonly   IProductRepository _productRepository;
-        readonly IMapper mapper;
+        
 
-        public ProductGettAllQueryHandler(IProductRepository productRepository, IMapper mapper)
+        public ProductGettAllQueryHandler(IProductRepository productRepository)
         {
-            _productRepository = productRepository;
-            this.mapper = mapper;
+            _productRepository = productRepository; 
         }
 
         async Task<List<ProductGettAllQueryResponse>> IRequestHandler<ProductGettAllQueryRequest, List<ProductGettAllQueryResponse>>.Handle(ProductGettAllQueryRequest request, CancellationToken cancellationToken)
-        { 
-
-            var products = await _productRepository.GetAllAsync(); 
-            var model= mapper.Map<List<ProductGettAllQueryResponse>>(products); 
-            return new List<ProductGettAllQueryResponse>(model);
+        {
+            var products = await _productRepository.GetAllAsync();
+            var productDtos = products.Select(x => ProductGettAllQueryResponse.Map(x));
+            return new List<ProductGettAllQueryResponse>(productDtos);
         }
     }
 }
