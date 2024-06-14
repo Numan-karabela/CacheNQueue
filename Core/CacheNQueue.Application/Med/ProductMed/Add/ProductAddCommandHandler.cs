@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using CacheNQueue.Application.Cache;
 using CacheNQueue.Application.Repositories.ProductRepository;
 using CacheNQueue.Domain.Entities;
 using MediatR;
@@ -13,22 +14,20 @@ using System.Threading.Tasks;
 namespace CacheNQueue.Application.Med.ProductMed.Add
 {
     public class ProductCommandHandler : IRequestHandler<ProductAddCommandReques, ProductAddCommandResponse>
-    {   readonly IProductRepository productRepository;
-        readonly IMapper mapper;
-        readonly IDistributedCache cache;
-        public ProductCommandHandler(IProductRepository productRepository, IMapper mapper, IDistributedCache cache)
+    {   readonly IProductRepository productRepository; 
+        readonly IRedisCacheService _cacheService;
+        public ProductCommandHandler(IProductRepository productRepository, IRedisCacheService cacheService = null)
         {
-            this.productRepository = productRepository;
-            this.mapper = mapper;
-            this.cache = cache;
+            this.productRepository = productRepository; 
+            _cacheService = cacheService;
         }
 
         public async Task<ProductAddCommandResponse> Handle(ProductAddCommandReques request, CancellationToken cancellationToken)
         {
               
              var product= ProductAddCommandReques.MapToProduct(request); 
-             await productRepository.AddAsync(product); 
-
+             await productRepository.AddAsync(product);
+             await _cacheService.SetAsync(product);
 
              
             return new()

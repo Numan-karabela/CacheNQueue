@@ -1,4 +1,5 @@
-﻿using CacheNQueue.Application.Repositories.ProductRepository;
+﻿using CacheNQueue.Application.Cache;
+using CacheNQueue.Application.Repositories.ProductRepository;
 using CacheNQueue.Domain.Entities;
 using MediatR;
 using System;
@@ -12,10 +13,12 @@ namespace CacheNQueue.Application.Med.ProductMed.Update
     public class ProductUpdateCommandHandler : IRequestHandler<ProductUpdateCommandRequest, ProductUpdateCommandResponse>
     {
         readonly IProductRepository _productRepository;
+        readonly IRedisCacheService _cacheService;
 
-        public ProductUpdateCommandHandler(IProductRepository productRepository)
+        public ProductUpdateCommandHandler(IProductRepository productRepository, IRedisCacheService cacheService = null)
         {
             _productRepository = productRepository;
+            _cacheService = cacheService;
         }
 
         public async Task<ProductUpdateCommandResponse> Handle(ProductUpdateCommandRequest request, CancellationToken cancellationToken)
@@ -23,7 +26,7 @@ namespace CacheNQueue.Application.Med.ProductMed.Update
            Product product= ProductUpdateCommandRequest.MapToProduct(request);
 
            await _productRepository.Update(product);
-             
+           await _cacheService.DeleteAllAsync();
 
             return new()
             {

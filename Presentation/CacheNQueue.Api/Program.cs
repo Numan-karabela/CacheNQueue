@@ -1,12 +1,10 @@
 using CacheNQueue.Persistence;
 using CacheNQueue.Application;
 
-var builder = WebApplication.CreateBuilder(args);
-IConfiguration a;
+var builder = WebApplication.CreateBuilder(args); 
 // Add services to the container.
 builder.Services.AddPersistanceService(builder.Configuration);
 builder.Services.AddAplicationService();
-builder.Services.AddStackExchangeRedisCache(Options=>Options.Configuration="Localhost=1453");
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using CacheNQueue.Application.Cache;
 using CacheNQueue.Application.Repositories.ProductRepository;
 using MediatR;
 using System;
@@ -13,16 +14,18 @@ namespace CacheNQueue.Application.Med.ProductMed.GetById
     {
         readonly IProductRepository productRepository;
         readonly IMapper mapper;
+        readonly IRedisCacheService _cacheService;
 
-        public ProductGetByIdQueryHandler(IProductRepository productRepository, IMapper mapper)
+        public ProductGetByIdQueryHandler(IProductRepository productRepository, IMapper mapper, IRedisCacheService cacheService = null)
         {
             this.productRepository = productRepository;
             this.mapper = mapper;
+            _cacheService = cacheService;
         }
 
         public async Task<ProductGetByIdQueryResponse> Handle(ProductGetByIdQueryRequest request, CancellationToken cancellationToken)
         {
-          var product= await productRepository.GetByIdAsync(request.Id);
+            var product = await _cacheService.GetByıdAsync(request.Id);
 
             return ProductGetByIdQueryResponse.Map(product);
 

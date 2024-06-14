@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using CacheNQueue.Application.Cache;
 using CacheNQueue.Application.Repositories.ProductRepository;
 using CacheNQueue.Domain.Entities;
 using MediatR;
@@ -14,17 +15,19 @@ namespace CacheNQueue.Application.Med.ProductMed.GetAll
 {
     public class ProductGettAllQueryHandler : IRequestHandler<ProductGettAllQueryRequest,List<ProductGettAllQueryResponse>>
     {
-        readonly   IProductRepository _productRepository;
-        
+        readonly IProductRepository _productRepository;
+        readonly IRedisCacheService _cacheService;
 
-        public ProductGettAllQueryHandler(IProductRepository productRepository)
+
+        public ProductGettAllQueryHandler(IProductRepository productRepository, IRedisCacheService cacheService = null)
         {
-            _productRepository = productRepository; 
+            _productRepository = productRepository;
+            _cacheService = cacheService;
         }
 
         async Task<List<ProductGettAllQueryResponse>> IRequestHandler<ProductGettAllQueryRequest, List<ProductGettAllQueryResponse>>.Handle(ProductGettAllQueryRequest request, CancellationToken cancellationToken)
         {
-            var products = await _productRepository.GetAllAsync();
+            var products = await _cacheService.GetAllAsync();
             var productDtos = products.Select(x => ProductGettAllQueryResponse.Map(x));
             return new List<ProductGettAllQueryResponse>(productDtos);
         }

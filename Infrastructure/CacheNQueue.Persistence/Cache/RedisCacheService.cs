@@ -1,4 +1,5 @@
-﻿using CacheNQueue.Domain.Entities;
+﻿using CacheNQueue.Application.Repositories.ProductRepository;
+using CacheNQueue.Domain.Entities;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Configuration;
@@ -15,55 +16,60 @@ namespace CacheNQueue.Application.Cache
     {
         readonly IDistributedCache cache;
         readonly IConfiguration collection;
+        readonly IProductRepository productRepository;
 
-        public RedisCacheService(IDistributedCache cache, IConfiguration collection)
+        public RedisCacheService(IDistributedCache cache, IConfiguration collection, IProductRepository productRepository)
         {
             this.cache = cache;
             this.collection = collection;
+            this.productRepository = productRepository;
         }
 
 
-        public async Task<List<Product>> GetAll()
-        {
-            string key = collection.GetConnectionString("GettAllRedis");
-
-            var productString = await cache.GetStringAsync(key);
+        public async Task<List<Product>> GetAllAsync()
+        { 
+            var productString = await cache.GetStringAsync(collection.GetConnectionString("GettAllRedis")); 
             if (string.IsNullOrEmpty(productString))
             {
-                return null;
-            }
+                 productString=JsonSerializer.Serialize(await productRepository.GetAllAsync());
+                 var  productStringh =  JsonSerializer.Deserialize<List<Product>>(productString);
+                await SetAllAsync(productStringh);
 
+                if (productString==null)
+                {
+                    return null;
+                }
+            } 
             return JsonSerializer.Deserialize<List<Product>>(productString);
         }
 
-        public async Task<Product> GetByıd(Guid key)
-        {
-            var product = await cache.GetStringAsync(Convert.ToString(key));
-            return JsonSerializer.Deserialize<Product>(product);
+        public async Task<List<Product>> GetByıdAsync(Guid key) 
+        { 
+            var products = JsonSerializer.Deserialize<List<Product>>(await cache.GetStringAsync(collection.GetConnectionString("GettAllRedis")));
+            products = products.Where(x => x.Id == key).ToList();
+
+            return products;    
         }
 
-        public async Task Delete(Guid key)
-        { 
-           await cache.RemoveAsync(Convert.ToString(key));
-        } 
 
-        public async Task DeleteAll()
+        public async Task SetAsync(Product product)
         {
-           string key = collection.GetConnectionString("GettAllRedis");
-           await cache.RemoveAsync(key);
-           GetAll();
-        }  
+            await cache.SetStringAsync(collection.GetConnectionString("GettAllRedis"), JsonSerializer.Serialize(product));
+           await  DeleteAllAsync();
 
-        public async Task Set(Product product, Guid key)
-        {
-           var keyString=Convert.ToString(key);
-           await cache.SetStringAsync(Convert.ToString(key),JsonSerializer.Serialize(product));
-        } 
+        }
 
-        public async Task  SetAll(List<Product> product, string key)
+        public async Task SetAllAsync(List<Product> product) 
         {
-            var productString=JsonSerializer.Serialize(product);
-            await cache.SetStringAsync(key,productString);
+            await cache.SetStringAsync(collection.GetConnectionString("GettAllRedis"), JsonSerializer.Serialize(product));
+            await  GetAllAsync();
+        }
+
+        public async Task DeleteAllAsync() 
+        {
+            await cache.RemoveAsync(collection.GetConnectionString("GettAllRedis"));
+            await GetAllAsync();
         }
     }
 }
+//

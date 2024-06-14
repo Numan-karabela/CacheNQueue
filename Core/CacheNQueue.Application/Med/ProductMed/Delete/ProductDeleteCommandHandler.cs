@@ -1,4 +1,5 @@
-﻿using CacheNQueue.Application.Repositories.ProductRepository;
+﻿using CacheNQueue.Application.Cache;
+using CacheNQueue.Application.Repositories.ProductRepository;
 using CacheNQueue.Domain.Entities;
 using MediatR;
 using System;
@@ -12,10 +13,11 @@ namespace CacheNQueue.Application.Med.ProductMed.Delete
     public class ProductDeleteCommandHandler : IRequestHandler<ProductDeleteCommandRequest, ProductDeleteCommandResponse>
     {
         private readonly IProductRepository _productRepository;
-
-        public ProductDeleteCommandHandler(IProductRepository productRepository)
+        readonly IRedisCacheService _cacheService;
+        public ProductDeleteCommandHandler(IProductRepository productRepository, IRedisCacheService cacheService = null)
         {
             _productRepository = productRepository;
+            _cacheService = cacheService;
         }
 
         public async Task<ProductDeleteCommandResponse> Handle(ProductDeleteCommandRequest request, CancellationToken cancellationToken)
@@ -24,7 +26,7 @@ namespace CacheNQueue.Application.Med.ProductMed.Delete
 
            Product product=await _productRepository.GetByIdAsync(request.Id); 
            await _productRepository.Remove(product);
-
+           await _cacheService.DeleteAllAsync();
 
             return new()
             {

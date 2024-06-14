@@ -1,4 +1,5 @@
-﻿using CacheNQueue.Application.Repositories.OrderItemsRepository;
+﻿using CacheNQueue.Application.Cache;
+using CacheNQueue.Application.Repositories.OrderItemsRepository;
 using CacheNQueue.Application.Repositories.OrderRepository;
 using CacheNQueue.Application.Repositories.ProductRepository;
 using CacheNQueue.Domain.Entities;
@@ -19,11 +20,13 @@ namespace CacheNQueue.Persistence
     {
         public static void AddPersistanceService(this IServiceCollection service, IConfiguration configuration)
         {
-            service.AddDbContext<CacheNQueueDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("sql")));
+            service.AddStackExchangeRedisCache(Options => Options.Configuration = configuration.GetConnectionString("RedisHost"));
+            service.AddDbContext<CacheNQueueDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("Sql")));
             service.AddScoped<IOrderItemRepository, OrderItemRepository>();
             service.AddScoped<IOrderRepository, OrderRepository>();
             service.AddScoped<IProductRepository, ProductRepository>();
             service.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<CacheNQueueDbContext>();
+            service.AddScoped<IRedisCacheService, RedisCacheService>();
 
         }
     }
