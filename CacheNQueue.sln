@@ -9,15 +9,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{47C4D41F-AD18-40F9-A227-9D4462664705}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CacheNQueue.Domain", "Core\CacheNQueue.Domain\CacheNQueue.Domain.csproj", "{A46DA3C7-75FC-4932-8F71-3BDF1F228149}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CacheNQueue.Domain", "Core\CacheNQueue.Domain\CacheNQueue.Domain.csproj", "{A46DA3C7-75FC-4932-8F71-3BDF1F228149}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CacheNQueue.Application", "Core\CacheNQueue.Application\CacheNQueue.Application.csproj", "{7C7E477A-BF27-4D60-A35A-B0BA6CCA6588}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CacheNQueue.Application", "Core\CacheNQueue.Application\CacheNQueue.Application.csproj", "{7C7E477A-BF27-4D60-A35A-B0BA6CCA6588}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CacheNQueue.Infrastructure", "Infrastructure\CacheNQueue.Infrastructure\CacheNQueue.Infrastructure.csproj", "{217B894B-5C22-4E85-9B25-D95CAACFC259}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CacheNQueue.Infrastructure", "Infrastructure\CacheNQueue.Infrastructure\CacheNQueue.Infrastructure.csproj", "{217B894B-5C22-4E85-9B25-D95CAACFC259}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CacheNQueue.Persistence", "Infrastructure\CacheNQueue.Persistence\CacheNQueue.Persistence.csproj", "{EA8E7D42-4961-4595-88DE-17F348F54E0B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CacheNQueue.Persistence", "Infrastructure\CacheNQueue.Persistence\CacheNQueue.Persistence.csproj", "{EA8E7D42-4961-4595-88DE-17F348F54E0B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CacheNQueue.Api", "Presentation\CacheNQueue.Api\CacheNQueue.Api.csproj", "{3964B1C0-F144-426C-9BD4-4956626E101C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CacheNQueue.Api", "Presentation\CacheNQueue.Api\CacheNQueue.Api.csproj", "{3964B1C0-F144-426C-9BD4-4956626E101C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

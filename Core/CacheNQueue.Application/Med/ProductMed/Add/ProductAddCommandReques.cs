@@ -17,7 +17,7 @@ namespace CacheNQueue.Application.Med.ProductMed.Add
         public static Product MapToProduct(ProductAddCommandReques command)
         {
             return new Product()
-            {
+            {   Id = Guid.NewGuid(),
                 Name = command.Name,
                 Price = command.Price,
                 Stock = command.Stock,

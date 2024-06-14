@@ -20,7 +20,7 @@ namespace CacheNQueue.Application.Med.ProductMed.GetAll
         public static ProductGettAllQueryResponse Map(Product product)
         {
             return new ProductGettAllQueryResponse()
-            {
+            {   Id= product.Id,
                 Name = product.Name,
                 Description = product.Description,
                 Price = product.Price,
