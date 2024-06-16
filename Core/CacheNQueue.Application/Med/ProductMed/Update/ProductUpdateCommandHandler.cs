@@ -26,7 +26,6 @@ namespace CacheNQueue.Application.Med.ProductMed.Update
            Product product= ProductUpdateCommandRequest.MapToProduct(request);
 
            await _productRepository.Update(product);
-           await _cacheService.DeleteAllAsync();
 
             return new()
             {

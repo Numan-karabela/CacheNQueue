@@ -9,9 +9,9 @@ namespace CacheNQueue.Application.Cache
 {
      public  interface  IRedisCacheService
     {
-        Task SetAsync (Product product);
-        Task<List<Product>> GetByıdAsync(Guid key);
+        Task<Product> GetByıdAsync(Guid key);
         Task<List<Product>> GetAllAsync();
-        Task DeleteAllAsync();
+        Task SetAsync (Product product);
+        Task DeleteAsync(Guid key);
     }
 }

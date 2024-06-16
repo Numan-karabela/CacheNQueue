@@ -26,7 +26,10 @@ namespace CacheNQueue.Application.Med.ProductMed.GetById
         public async Task<ProductGetByIdQueryResponse> Handle(ProductGetByIdQueryRequest request, CancellationToken cancellationToken)
         {
             var product = await _cacheService.GetByıdAsync(request.Id);
-
+            if (product == null)
+            {
+                return null;
+            }
             return ProductGetByIdQueryResponse.Map(product);
 
             
