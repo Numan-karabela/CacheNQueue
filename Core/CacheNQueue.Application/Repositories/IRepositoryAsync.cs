@@ -15,9 +15,9 @@ namespace CacheNQueue.Application.Repositories
 
         Task AddAsync(T entity); 
 
-        Task Update(T entity);
+        Task UpdateAsync(T entity);
 
-        Task Remove(T entity); 
+        Task RemoveAsync(T entity); 
     }
 }
 

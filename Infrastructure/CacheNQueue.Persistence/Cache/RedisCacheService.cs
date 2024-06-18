@@ -18,18 +18,22 @@ namespace CacheNQueue.Application.Cache
         readonly IDistributedCache cache;
         readonly IConfiguration collection;
         readonly IProductRepository productRepository;
+        CancellationTokenSource cts;
+        CancellationToken  cancellationToken;
 
         public RedisCacheService(IDistributedCache cache, IConfiguration collection, IProductRepository productRepository)
         {
             this.cache = cache;
             this.collection = collection;
             this.productRepository = productRepository;
+            cts = new CancellationTokenSource();
+            cancellationToken = cts.Token;
         }
 
 
         public async Task<List<Product>> GetAllAsync()
         {
-            var productString = await cache.GetStringAsync(collection.GetConnectionString("GettAllRedis"));
+            var productString = await cache.GetStringAsync(collection.GetConnectionString("GettAllRedis"), cancellationToken);
             if (string.IsNullOrEmpty(productString))
             {
                 productString = JsonSerializer.Serialize(await productRepository.GetAllAsync());
@@ -46,7 +50,7 @@ namespace CacheNQueue.Application.Cache
 
         public async Task<Product> GetByıdAsync(Guid key)
         {
-            var productString = await cache.GetStringAsync(Convert.ToString(key));
+            var productString = await cache.GetStringAsync(Convert.ToString(key), cancellationToken);
             if (string.IsNullOrEmpty(productString))
             {
                 var products = JsonSerializer.Deserialize<List<Product>>(await cache.GetStringAsync(collection.GetConnectionString("GettAllRedis")));

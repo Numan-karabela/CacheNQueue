@@ -27,7 +27,7 @@ namespace CacheNQueue.Application.Med.ProductMed.Delete
            var product=await _productRepository.GetByIdAsync(request.Id);
             await _cacheService.DeleteAsync(product.Id);
 
-            await _productRepository.Remove(product);
+            await _productRepository.RemoveAsync(product);
 
             return new()
             {
