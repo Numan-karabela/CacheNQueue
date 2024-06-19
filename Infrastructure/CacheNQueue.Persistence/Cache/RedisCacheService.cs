@@ -17,30 +17,25 @@ namespace CacheNQueue.Application.Cache
     {
         readonly IDistributedCache cache;
         readonly IConfiguration collection;
-        readonly IProductRepository productRepository;
-        CancellationTokenSource cts;
-        CancellationToken  cancellationToken;
+        readonly IProductRepository productRepository; 
 
         public RedisCacheService(IDistributedCache cache, IConfiguration collection, IProductRepository productRepository)
         {
             this.cache = cache;
             this.collection = collection;
-            this.productRepository = productRepository;
-            cts = new CancellationTokenSource();
-            cancellationToken = cts.Token;
+            this.productRepository = productRepository; 
         }
 
 
-        public async Task<List<Product>> GetAllAsync()
+        public async Task<List<Product>> GetAllAsync(CancellationToken cancellationToken)
         {
             var productString = await cache.GetStringAsync(collection.GetConnectionString("GettAllRedis"), cancellationToken);
             if (string.IsNullOrEmpty(productString))
-            {
-                productString = JsonSerializer.Serialize(await productRepository.GetAllAsync());
-                var productStringh = JsonSerializer.Deserialize<List<Product>>(productString);
-                await SetAllAsync(productStringh);
+            { 
+                var products = await productRepository.GetAllAsync(cancellationToken);
+                await SetAllAsync(products, cancellationToken);
 
-                if (productString == null)
+                if (products == null)
                 {
                     return null;
                 }
@@ -48,7 +43,7 @@ namespace CacheNQueue.Application.Cache
             return JsonSerializer.Deserialize<List<Product>>(productString);
         }
 
-        public async Task<Product> GetByıdAsync(Guid key)
+        public async Task<Product> GetByıdAsync(Guid key, CancellationToken cancellationToken)
         {
             var productString = await cache.GetStringAsync(Convert.ToString(key), cancellationToken);
             if (string.IsNullOrEmpty(productString))
@@ -62,7 +57,7 @@ namespace CacheNQueue.Application.Cache
                     return null;
                 }
 
-                await SetAsync(productCache);
+                await SetAsync(productCache,cancellationToken);
 
                 return productCache;
 
@@ -71,27 +66,32 @@ namespace CacheNQueue.Application.Cache
         }
 
 
-        public async Task SetAsync(Product product)
+        public async Task SetAsync(Product product, CancellationToken cancellationToken)
         {
+            var Control= await GetByıdAsync(product.Id,cancellationToken);
+            if (Control != null)
+            {
+                Console.WriteLine("veri sistemde kayıtlı");
+            }
             await cache.SetStringAsync($"{JsonSerializer.Serialize(product.Id)}", JsonSerializer.Serialize(product));
             var products = JsonSerializer.Deserialize<List<Product>>(await cache.GetStringAsync(collection.GetConnectionString("GettAllRedis")));
             products = products.ToList();
             products.Add(product);
             await cache.RemoveAsync(collection.GetConnectionString(("GettAllRedis")));
-            await SetAllAsync(products); 
+            await SetAllAsync(products, cancellationToken);
         }
 
-        public async Task SetAllAsync(List<Product> product) //tamm
+        public async Task SetAllAsync(List<Product> product, CancellationToken cancellationToken) 
         {
             await cache.SetStringAsync(collection.GetConnectionString("GettAllRedis"), JsonSerializer.Serialize(product)); 
         }
 
-        public async Task DeleteAsync(Guid key)
+        public async Task DeleteAsync(Guid key, CancellationToken cancellationToken)
         {
             var products = JsonSerializer.Deserialize<List<Product>>(await cache.GetStringAsync(collection.GetConnectionString("GettAllRedis")));
             await cache.RemoveAsync($"{Convert.ToString(key)}");
             products = products.Where(x => x.Id != key).ToList();
-            await SetAllAsync(products);
+            await SetAllAsync(products, cancellationToken);
 
         }
     }

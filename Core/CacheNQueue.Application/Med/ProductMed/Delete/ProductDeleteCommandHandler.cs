@@ -24,10 +24,10 @@ namespace CacheNQueue.Application.Med.ProductMed.Delete
         {
 
 
-           var product=await _productRepository.GetByIdAsync(request.Id);
-            await _cacheService.DeleteAsync(product.Id);
+           var product=await _productRepository.GetByIdAsync(request.Id,cancellationToken);
+            await _cacheService.DeleteAsync(product.Id, cancellationToken);
 
-            await _productRepository.RemoveAsync(product);
+            await _productRepository.RemoveAsync(product, cancellationToken);
 
             return new()
             {

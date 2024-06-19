@@ -26,8 +26,8 @@ namespace CacheNQueue.Application.Med.ProductMed.Add
         {
               
              var product= ProductAddCommandReques.MapToProduct(request); 
-             await productRepository.AddAsync(product);
-             await _cacheService.SetAsync(product);
+             await productRepository.AddAsync(product,cancellationToken);
+             await _cacheService.SetAsync(product,cancellationToken);
 
              
             return new()
