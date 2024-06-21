@@ -20,12 +20,13 @@ namespace CacheNQueue.Persistence
     {
         public static void AddPersistanceService(this IServiceCollection service, IConfiguration configuration)
         {
+            service.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<CacheNQueueDbContext>();
+
             service.AddStackExchangeRedisCache(Options => Options.Configuration = configuration.GetConnectionString("RedisHost"));
             service.AddDbContext<CacheNQueueDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("Sql")));
             service.AddScoped<IOrderItemRepository, OrderItemRepository>();
             service.AddScoped<IOrderRepository, OrderRepository>();
             service.AddScoped<IProductRepository, ProductRepository>();
-            service.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<CacheNQueueDbContext>();
             service.AddScoped<IRedisCacheService, RedisCacheService>();
 
         }
