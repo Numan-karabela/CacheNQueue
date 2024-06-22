@@ -22,7 +22,7 @@ namespace CacheNQueue.Persistence
         {
             service.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<CacheNQueueDbContext>();
 
-            service.AddStackExchangeRedisCache(Options => Options.Configuration = configuration.GetConnectionString("RedisHost"));
+            service.AddStackExchangeRedisCache(Options => Options.Configuration = (configuration["Redis:RedisHost"]));
             service.AddDbContext<CacheNQueueDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("Sql")));
             service.AddScoped<IOrderItemRepository, OrderItemRepository>();
             service.AddScoped<IOrderRepository, OrderRepository>();

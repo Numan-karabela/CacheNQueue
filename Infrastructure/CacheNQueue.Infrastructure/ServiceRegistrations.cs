@@ -1,6 +1,5 @@
 ﻿using Application.Abstractions.Token;
-using AutoMapper;
-using MediatR;
+using CacheNQueue.Infrastructure.Services.Token;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -9,15 +8,14 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CacheNQueue.Application
+namespace CacheNQueue.Infrastructure
 {
     public static class ServiceRegistrations
     {
-        public static void AddAplicationService(this IServiceCollection services )
+        public static void AddInfrastructureService(this IServiceCollection services)
         {
-            var assm=Assembly.GetExecutingAssembly();
-            services.AddMediatR(assm);
-            services.AddAutoMapper(assm);
+            services.AddScoped<ITokenHandler,TokenHandler>();
+
 
 
         }

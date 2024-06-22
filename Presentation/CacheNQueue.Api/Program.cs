@@ -1,15 +1,21 @@
 using CacheNQueue.Persistence;
 using CacheNQueue.Application;
+using CacheNQueue.Api.Middlewares;
+using CacheNQueue.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args); 
 // Add services to the container.
 builder.Services.AddPersistanceService(builder.Configuration);
 builder.Services.AddAplicationService();
+builder.Services.AddInfrastructureService();
+builder.Services.addJwtHandler(builder.Configuration);
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
 
 var app = builder.Build();
 

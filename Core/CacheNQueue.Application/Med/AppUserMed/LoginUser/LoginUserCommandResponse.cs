@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CacheNQueue.Application.Abstractions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,8 @@ namespace CacheNQueue.Application.Med.AppUserMed.LoginUser
 {
     public class LoginUserCommandResponse
     {
+        public TokenResponse Token { get; set;}
+
         public string message { get; set; }
     }
 }

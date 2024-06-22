@@ -24,7 +24,7 @@ namespace CacheNQueue.Api.Controllers
            CreateUserCommandResponse response= await mediator.Send(request);
             return Ok(response);
         }
-        [HttpPost("[Login]")]
+        [HttpPost("Login")]
         public async Task<IActionResult> UserLogin(LoginUserCommandRequest request)
         {
             LoginUserCommandResponse response = await mediator.Send(request);
