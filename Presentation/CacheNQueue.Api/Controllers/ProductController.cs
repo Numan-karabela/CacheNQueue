@@ -5,6 +5,7 @@ using CacheNQueue.Application.Med.ProductMed.GetById;
 using CacheNQueue.Application.Med.ProductMed.Update;
 using CacheNQueue.Domain.Entities;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Distributed;
@@ -13,6 +14,7 @@ namespace CacheNQueue.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    //[Authorize(AuthenticationSchemes = "Admin")]
     public class ProductController : ControllerBase
     {
         readonly IMediator mediator;

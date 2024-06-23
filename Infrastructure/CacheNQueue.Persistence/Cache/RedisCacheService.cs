@@ -94,5 +94,13 @@ namespace CacheNQueue.Application.Cache
             await SetAllAsync(products, cancellationToken);
 
         }
+        public async Task DeleteeAsync(Guid key, CancellationToken cancellationToken)
+        {
+            var products = JsonSerializer.Deserialize<List<Product>>(await cache.GetStringAsync(configuration["Redis:GettAllRedis"]));
+            await cache.RemoveAsync($"{Convert.ToString(key)}");
+            products = products.Where(x => x.Id != key).ToList();
+            await SetAllAsync(products, cancellationToken);
+
+        }
     }
 }
