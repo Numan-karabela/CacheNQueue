@@ -15,5 +15,12 @@ namespace CacheNQueue.Application.Repositories.OrderItemsRepository
         public OrderItemRepository(CacheNQueueDbContext context) : base(context)
         {
         }
+        public async Task<List<OrderItem>> GetOrderItemsByOrderIdAsync(Guid orderId, CancellationToken cancellationToken)
+        {
+            return await _context.OrderItems
+                                 .Where(oi => oi.OrderId == orderId)
+                                 .Include(oi => oi.Product)
+                                 .ToListAsync(cancellationToken);
+        }
     }
 }

@@ -25,6 +25,7 @@ namespace CacheNQueue.Application.Med.ProductMed.GetAll
             _cacheService = cacheService;
         }
 
+
         async Task<List<ProductGettAllQueryResponse>> IRequestHandler<ProductGettAllQueryRequest, List<ProductGettAllQueryResponse>>.Handle(ProductGettAllQueryRequest request, CancellationToken cancellationToken)
         {
             var products = await _cacheService.GetAllAsync(cancellationToken); 

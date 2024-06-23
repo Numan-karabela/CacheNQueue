@@ -9,5 +9,6 @@ namespace CacheNQueue.Application.Repositories.OrderRepository
 {
     public interface IOrderRepository :IRepositoryAsync<Order>
     {
+        Task<List<Order>> GetOrdersByUserIdAsync(Guid userId);
     }
 }

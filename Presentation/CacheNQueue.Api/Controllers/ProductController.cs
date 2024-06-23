@@ -17,13 +17,11 @@ namespace CacheNQueue.Api.Controllers
     //[Authorize(AuthenticationSchemes = "Admin")]
     public class ProductController : ControllerBase
     {
-        readonly IMediator mediator;
-        readonly IDistributedCache _distributedCache;
+        readonly IMediator mediator; 
 
-        public ProductController(IMediator mediator, IDistributedCache distributedCache = null)
+        public ProductController(IMediator mediator)
         {
-            this.mediator = mediator;
-            _distributedCache = distributedCache;
+            this.mediator = mediator; 
         }
         [HttpPut]
         public async Task<IActionResult>Add(ProductAddCommandReques reques)

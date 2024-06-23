@@ -5,6 +5,8 @@ using CacheNQueue.Infrastructure;
 using CacheNQueue.Api.Middlewares.Filter;
 using CacheNQueue.Api.Middlewares.Filter.Validation;
 using CacheNQueue.Api.Middlewares.Filter.CacheNQueue.Api.Middlewares.Filter;
+using FluentValidation.AspNetCore;
+using CacheNQueue.Application.Validation;
 var builder = WebApplication.CreateBuilder(args); 
 // Add services to the container.
 builder.Services.AddPersistanceService(builder.Configuration);
@@ -16,8 +18,8 @@ builder.Services.AddTransient<ExceptionMiddleware>();
 builder.Services.AddControllers(options =>
 {
     options.Filters.Add<ValidationFilter>();
-});
-    
+}).AddFluentValidation(configuration => configuration.RegisterValidatorsFromAssemblyContaining<Validations>());
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 
 builder.Services.AddEndpointsApiExplorer();

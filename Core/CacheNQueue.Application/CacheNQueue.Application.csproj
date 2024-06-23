@@ -21,9 +21,4 @@
     <ProjectReference Include="..\CacheNQueue.Domain\CacheNQueue.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Med\OrderItemsMed\" />
-    <Folder Include="Med\OrderMed\" />
-  </ItemGroup>
-
 </Project>
