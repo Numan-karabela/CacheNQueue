@@ -18,9 +18,8 @@ builder.Services.AddTransient<ExceptionMiddleware>();
 builder.Services.AddControllers(options =>
 {
     options.Filters.Add<ValidationFilter>();
-}).AddFluentValidation(configuration => configuration.RegisterValidatorsFromAssemblyContaining<Validations>());
-
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+});
+ 
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

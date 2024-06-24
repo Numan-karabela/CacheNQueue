@@ -14,7 +14,7 @@ namespace CacheNQueue.Application.Features.OrderMed
         public string OrderStatus { get; set; } // Sipariş durumu 
         public decimal TotalAmount { get; set; } // Toplam tutar  
 
-        public AppRole User { get; set; } // Siparişi veren kullanıcı
+        public AppUser User { get; set; } // Siparişi veren kullanıcı
         public ICollection<OrderItem> OrderItems { get; set; } // Siparişin detayları
 
         public static GetOrderByIdQueryrResponse Map(Order order)
