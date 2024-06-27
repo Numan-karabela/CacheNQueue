@@ -10,27 +10,27 @@ using System.Threading.Tasks;
 
 namespace CacheNQueue.Application.Med.ProductMed.GetById
 {
-    public class ProductGetByIdQueryHandler : IRequestHandler<ProductGetByIdQueryRequest, ProductGetByIdQueryResponse>
+    public class GetByIdProductQueryHandler : IRequestHandler<GetByIdProductQueryRequest, GetByIdProductQueryResponse>
     {
         readonly IProductRepository productRepository;
         readonly IMapper mapper;
         readonly IRedisCacheService _cacheService;
 
-        public ProductGetByIdQueryHandler(IProductRepository productRepository, IMapper mapper, IRedisCacheService cacheService = null)
+        public GetByIdProductQueryHandler(IProductRepository productRepository, IMapper mapper, IRedisCacheService cacheService = null)
         {
             this.productRepository = productRepository;
             this.mapper = mapper;
             _cacheService = cacheService;
         }
 
-        public async Task<ProductGetByIdQueryResponse> Handle(ProductGetByIdQueryRequest request, CancellationToken cancellationToken)
+        public async Task<GetByIdProductQueryResponse> Handle(GetByIdProductQueryRequest request, CancellationToken cancellationToken)
         {
             var product = await _cacheService.GetByıdAsync(request.Id, cancellationToken);
             if (product == null)
             {
                 return null;
             }
-            return ProductGetByIdQueryResponse.Map(product);
+            return GetByIdProductQueryResponse.Map(product);
 
             
         }

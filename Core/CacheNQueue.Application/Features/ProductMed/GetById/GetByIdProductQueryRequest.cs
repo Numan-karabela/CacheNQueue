@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CacheNQueue.Application.Med.ProductMed.GetById
 {
-    public class ProductGetByIdQueryRequest:IRequest<ProductGetByIdQueryResponse>
+    public class GetByIdProductQueryRequest:IRequest<GetByIdProductQueryResponse>
     {
         public Guid Id { get; set; }
     }

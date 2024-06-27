@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace CacheNQueue.Application.Med.ProductMed.Add
 {
-    public class ProductAddCommandReques:IRequest<ProductAddCommandResponse>
+    public class CreateProductCommandReques:IRequest<CreateProductCommandResponse>
     { 
             public string Name { get; set; } 
             public string Description { get; set; }    
             public decimal Price { get; set; }  
             public int Stock { get; set; }  
-        public static Product MapToProduct(ProductAddCommandReques command)
+        public static Product Map(CreateProductCommandReques command)
         {
             return new Product()
             {   Id = Guid.NewGuid(),

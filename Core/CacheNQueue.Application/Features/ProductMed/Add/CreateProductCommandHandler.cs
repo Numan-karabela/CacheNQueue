@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace CacheNQueue.Application.Med.ProductMed.Add
 {
-    public class ProductCommandHandler : IRequestHandler<ProductAddCommandReques, ProductAddCommandResponse>
+    public class ProductCommandHandler : IRequestHandler<CreateProductCommandReques, CreateProductCommandResponse>
     {   readonly IProductRepository productRepository; 
         readonly IRedisCacheService _cacheService;
         public ProductCommandHandler(IProductRepository productRepository, IRedisCacheService cacheService = null)
@@ -22,10 +22,10 @@ namespace CacheNQueue.Application.Med.ProductMed.Add
             _cacheService = cacheService;
         }
 
-        public async Task<ProductAddCommandResponse> Handle(ProductAddCommandReques request, CancellationToken cancellationToken)
+        public async Task<CreateProductCommandResponse> Handle(CreateProductCommandReques request, CancellationToken cancellationToken)
         {
               
-             var product= ProductAddCommandReques.MapToProduct(request); 
+             var product= CreateProductCommandReques.Map(request); 
              await productRepository.AddAsync(product,cancellationToken);
              await _cacheService.SetAsync(product,cancellationToken);
 

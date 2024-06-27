@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CacheNQueue.Application.Med.ProductMed.GetAll
 {
-    public class ProductGettAllQueryResponse
+    public class GettAllProductQueryResponse
     {
         public Guid Id { get; set; }
         public string Name { get; set; }   
@@ -17,9 +17,9 @@ namespace CacheNQueue.Application.Med.ProductMed.GetAll
         public decimal Price { get; set; }  
         public int Stock { get; set; }
 
-        public static ProductGettAllQueryResponse Map(Product product)
+        public static GettAllProductQueryResponse Map(Product product)
         {
-            return new ProductGettAllQueryResponse()
+            return new GettAllProductQueryResponse()
             {   Id= product.Id,
                 Name = product.Name,
                 Description = product.Description,

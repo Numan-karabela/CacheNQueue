@@ -10,20 +10,20 @@ using System.Threading.Tasks;
 
 namespace CacheNQueue.Application.Med.ProductMed.Update
 {
-    public class ProductUpdateCommandHandler : IRequestHandler<ProductUpdateCommandRequest, ProductUpdateCommandResponse>
+    public class UpdateProductCommandHandler : IRequestHandler<UpdateProductCommandRequest, ProductUpdateCommandResponse>
     {
         readonly IProductRepository _productRepository;
         readonly IRedisCacheService _cacheService;
 
-        public ProductUpdateCommandHandler(IProductRepository productRepository, IRedisCacheService cacheService = null)
+        public UpdateProductCommandHandler(IProductRepository productRepository, IRedisCacheService cacheService = null)
         {
             _productRepository = productRepository;
             _cacheService = cacheService;
         }
 
-        public async Task<ProductUpdateCommandResponse> Handle(ProductUpdateCommandRequest request, CancellationToken cancellationToken)
+        public async Task<ProductUpdateCommandResponse> Handle(UpdateProductCommandRequest request, CancellationToken cancellationToken)
         {
-           Product product= ProductUpdateCommandRequest.MapToProduct(request);
+           Product product= UpdateProductCommandRequest.Map(request);
 
            await _productRepository.UpdateAsync(product, cancellationToken);
 

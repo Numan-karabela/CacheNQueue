@@ -1,14 +1,13 @@
-﻿using CacheNQueue.Domain.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CacheNQueue.Application.Med.ProductMed.Add
+namespace CacheNQueue.Application.Med.ProductMed.Delete
 {
-    public class ProductAddCommandResponse
-    {
+    public class DeleteProductCommandResponse
+    { 
         public string Message { get; set; }  
     }
 }

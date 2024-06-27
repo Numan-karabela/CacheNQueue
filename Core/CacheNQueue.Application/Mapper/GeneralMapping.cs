@@ -14,9 +14,7 @@ namespace CacheNQueue.Application.Mapper
     public class GeneralMapping:Profile
     {
         public GeneralMapping()
-        {
-            CreateMap<Product,ProductGettAllQueryResponse>().ReverseMap();
-            CreateMap<Product,ProductGetByIdQueryResponse>().ReverseMap();
+        { 
 
         }
     }

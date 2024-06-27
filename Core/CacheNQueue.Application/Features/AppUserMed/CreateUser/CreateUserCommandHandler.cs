@@ -20,7 +20,7 @@ namespace CacheNQueue.Application.Med.ProductMed.CreateUser
 
         public async Task<CreateUserCommandResponse> Handle(CreateUserCommandRequest request, CancellationToken cancellationToken)
         {
-           var UserMap= CreateUserCommandRequest.AppUserMap(request);
+           var UserMap= CreateUserCommandRequest.Map(request);
            await userManager.CreateAsync(UserMap,request.Password);
 
             return new();

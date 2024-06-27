@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CacheNQueue.Application.Med.ProductMed.GetAll
 {
-    public class ProductGettAllQueryRequest:IRequest<List<ProductGettAllQueryResponse>>
+    public class GettAllProductQueryRequest:IRequest<List<GettAllProductQueryResponse>>
     {
        
 

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CacheNQueue.Application.Med.ProductMed.GetById
 {
-    public class ProductGetByIdQueryResponse
+    public class GetByIdProductQueryResponse
     {
         public string Name { get; set; }
         public string Description { get; set; }
@@ -15,9 +15,9 @@ namespace CacheNQueue.Application.Med.ProductMed.GetById
         public int Stock { get; set; }
 
 
-        public static ProductGetByIdQueryResponse Map(Product product)
+        public static GetByIdProductQueryResponse Map(Product product)
         {
-            return new ProductGetByIdQueryResponse()
+            return new GetByIdProductQueryResponse()
             {
                 Name = product.Name,
                 Description = product.Description,

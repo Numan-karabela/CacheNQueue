@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CacheNQueue.Application.Med.ProductMed.Delete
 {
-    public class ProductDeleteCommandRequest : IRequest<ProductDeleteCommandResponse>
+    public class DeleteProductCommandRequest : IRequest<DeleteProductCommandResponse>
     {
         public Guid Id { get; set; }
 

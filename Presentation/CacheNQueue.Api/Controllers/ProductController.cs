@@ -24,22 +24,22 @@ namespace CacheNQueue.Api.Controllers
             this.mediator = mediator; 
         }
         [HttpPut]
-        public async Task<IActionResult>Add(ProductAddCommandReques reques)
+        public async Task<IActionResult>Add(CreateProductCommandReques reques)
         {
-          ProductAddCommandResponse response= await mediator.Send(reques);
+          CreateProductCommandResponse response= await mediator.Send(reques);
            return Ok(response);
 
         }
         [HttpPut("DeleteId")]
-        public async Task<IActionResult> Delete(ProductDeleteCommandRequest request)
+        public async Task<IActionResult> Delete(DeleteProductCommandRequest request)
         {
 
-            ProductDeleteCommandResponse response = await mediator.Send(request);
+            DeleteProductCommandResponse response = await mediator.Send(request);
             return Ok(response);
         }
 
         [HttpPut("UpdateId")]
-        public async Task<IActionResult> Update(ProductUpdateCommandRequest request)
+        public async Task<IActionResult> Update(UpdateProductCommandRequest request)
         {
             ProductUpdateCommandResponse response = await mediator.Send(request);
             return Ok(response);
@@ -48,15 +48,15 @@ namespace CacheNQueue.Api.Controllers
         [HttpGet("Gett")]
         public async Task<IActionResult> GettAll()
         {
-            ProductGettAllQueryRequest request = new ProductGettAllQueryRequest();
+            GettAllProductQueryRequest request = new GettAllProductQueryRequest();
 
             return Ok(await mediator.Send(request));
         }
         [HttpGet("Id")]
         public async Task<IActionResult> GettById(Guid id)
         {
-            ProductGetByIdQueryRequest request1 = new() { Id=id};
-            ProductGetByIdQueryResponse response= await mediator.Send(request1);
+            GetByIdProductQueryRequest request1 = new() { Id=id};
+            GetByIdProductQueryResponse response= await mediator.Send(request1);
             return Ok(response);
         }
 

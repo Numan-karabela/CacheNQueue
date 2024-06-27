@@ -17,10 +17,9 @@ namespace CacheNQueue.Application
         public static void AddAplicationService(this IServiceCollection services )
         {
             var assm=Assembly.GetExecutingAssembly();
-            services.AddFluentValidation(p => p.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly()));
-
+            services.AddFluentValidation(p => p.RegisterValidatorsFromAssembly(assm)); 
             services.AddMediatR(assm);
-            services.AddAutoMapper(assm);
+            //services.AddAutoMapper(assm);
 
 
         }

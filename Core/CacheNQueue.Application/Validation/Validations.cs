@@ -1,5 +1,6 @@
 ﻿using CacheNQueue.Application.Features.OrderMed.Add;
 using CacheNQueue.Application.Med.ProductMed.Add;
+using CacheNQueue.Application.Med.ProductMed.CreateUser;
 using CacheNQueue.Domain.Entities;
 using FluentValidation;
 using System;
@@ -10,9 +11,9 @@ using System.Threading.Tasks;
 
 namespace CacheNQueue.Application.Validation
 {
-    public class Validations : AbstractValidator<ProductAddCommandReques>
+    public class ProductValidations : AbstractValidator<CreateProductCommandReques>
     {
-        public Validations()
+        public ProductValidations()
         {
             RuleFor(x => x.Name).NotEmpty()
                 .WithMessage("Name Boş Geçilemez")
@@ -21,7 +22,7 @@ namespace CacheNQueue.Application.Validation
                 .MaximumLength(15)
                 .MinimumLength(3)
                 .WithMessage("3-15 değer aralığında isimlendirme kullanınız");
-            RuleFor(x=>x.Description)
+            RuleFor(x => x.Description)
                 .NotEmpty()
                 .WithMessage("Description Boş Geçilemez")
                 .NotNull()
@@ -33,6 +34,52 @@ namespace CacheNQueue.Application.Validation
                 .WithMessage("3-15 değer aralığında isimlendirme kullanınız");
 
         }
+    }
+    public class OrderValidation : AbstractValidator<CreateOrderCommandRequest>
+    {
+        public OrderValidation()
+        {
+            RuleFor(x => x.User).NotNull().NotEmpty().WithMessage("Boş brakılamaz");
+            RuleFor(x => x.Order).NotNull().NotEmpty().WithMessage("Boş brakılamaz");
+            RuleFor(x => x.OrderItems).NotNull().NotEmpty().WithMessage("Boş brakılamaz");
+            RuleFor(x => x.OrderStatus).NotNull().NotEmpty().WithMessage("Boş brakılamaz"); 
+        } 
     } 
-    
+    public class UserValidation : AbstractValidator<CreateUserCommandRequest>
+    {
+        public UserValidation()
+        {
+            RuleFor(x => x.UserName)
+                .NotEmpty()
+                .NotNull()
+                .WithMessage("Kullanıcı adı boş brakılamaz")
+                .MaximumLength(10)
+                .MinimumLength(3)
+                .WithMessage("3-10 değer aralığında bir kullanıcı adı giriniz");
+            RuleFor(x => x.Name_Surname)
+                .NotEmpty()
+                .NotNull()
+                .WithMessage(" boş brakılamaz")
+                .MaximumLength(20)
+                .WithMessage("5-10 değer aralığında bir kullanıcı adı giriniz");
+            RuleFor(x => x.Email)
+                .NotEmpty()
+                .NotNull()
+                .WithMessage(" boş brakılamaz")
+                .EmailAddress()
+                .WithMessage("Email adresini doğru giriniz");
+            RuleFor(x=>x.Password).NotEmpty()
+                .NotNull()
+                .WithMessage(" boş brakılamaz")
+                .MaximumLength(20)
+                .MinimumLength(2)
+                .WithMessage("5-10 değer aralığında bir kullanıcı adı giriniz");
+            RuleFor(x => x.PasswordConfirm).NotEmpty()
+               .NotNull()
+               .WithMessage(" boş brakılamaz")
+               .MaximumLength(20)
+               .MinimumLength(2)
+               .WithMessage("5-10 değer aralığında bir kullanıcı adı giriniz");
+        }
+    }
 }

@@ -10,17 +10,17 @@ using System.Threading.Tasks;
 
 namespace CacheNQueue.Application.Med.ProductMed.Delete
 {
-    public class ProductDeleteCommandHandler : IRequestHandler<ProductDeleteCommandRequest, ProductDeleteCommandResponse>
+    public class DeleteProductCommandHandler : IRequestHandler<DeleteProductCommandRequest, DeleteProductCommandResponse>
     {
         private readonly IProductRepository _productRepository;
         readonly IRedisCacheService _cacheService;
-        public ProductDeleteCommandHandler(IProductRepository productRepository, IRedisCacheService cacheService = null)
+        public DeleteProductCommandHandler(IProductRepository productRepository, IRedisCacheService cacheService = null)
         {
             _productRepository = productRepository;
             _cacheService = cacheService;
         }
 
-        public async Task<ProductDeleteCommandResponse> Handle(ProductDeleteCommandRequest request, CancellationToken cancellationToken)
+        public async Task<DeleteProductCommandResponse> Handle(DeleteProductCommandRequest request, CancellationToken cancellationToken)
         {
 
 

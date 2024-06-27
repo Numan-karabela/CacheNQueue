@@ -18,15 +18,20 @@ namespace CacheNQueue.Application.Med.ProductMed.CreateUser
         public string PasswordConfirm{ get; set; }
 
 
-        public static AppUser AppUserMap(CreateUserCommandRequest request)
+        public static AppUser Map(CreateUserCommandRequest request)
         {
-            return new AppUser()
+            if (request.Password==request.PasswordConfirm)
             {
-                Id = Guid.NewGuid().ToString(),
-                UserName = request.UserName,
-                Surname = request.Name_Surname,
-                Email = request.Email, 
-            };
+                return new AppUser()
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    UserName = request.UserName,
+                    Surname = request.Name_Surname,
+                    Email = request.Email,
+                };
+
+            }
+            throw new Exception("Şifre eşlesmiyor");
 
         }
     }
