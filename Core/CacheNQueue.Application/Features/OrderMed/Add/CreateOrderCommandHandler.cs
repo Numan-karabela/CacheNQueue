@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using CacheNQueue.Application.Repositories.OrderItemsRepository;
 using CacheNQueue.Application.Repositories.OrderRepository;
+using CacheNQueue.Application.Repositories.ProductRepository;
 using CacheNQueue.Domain.Entities;
 using MediatR;
+using Pipelines.Sockets.Unofficial;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,30 +17,28 @@ namespace CacheNQueue.Application.Features.OrderMed.Add
     {
         private readonly IOrderRepository _orderRepository;
         private readonly IOrderItemRepository _orderItemRepository;
+        private readonly IProductRepository _productRepository;
         private readonly IMapper mapper;
 
-        public CreateOrderCommandHandler(IOrderRepository orderRepository, IOrderItemRepository orderItemRepository, IMapper mapper)
+        public CreateOrderCommandHandler(IOrderRepository orderRepository, IOrderItemRepository orderItemRepository, IMapper mapper, IProductRepository productRepository)
         {
             _orderRepository = orderRepository;
             _orderItemRepository = orderItemRepository;
             this.mapper = mapper;
+            _productRepository = productRepository;
         }
 
 
 
         async  Task<CreateOrderCommandResponse> IRequestHandler<CreateOrderCommandRequest, CreateOrderCommandResponse>.Handle(CreateOrderCommandRequest request, CancellationToken cancellationToken)
         {
+           var orderMap =CreateOrderCommandRequest.Map(request);
 
-           var a = await _orderRepository.GetUserAsync(request.UserId); 
-           var map= CreateOrderCommandRequest.Map(request,a);
-           await _orderRepository.AddAsync(map,cancellationToken);
 
-            //foreach (var orderItem in request.OrderItems)
-            //{
-            //    orderItem.OrderId = request.Order.Id;
-            //    await _orderItemRepository.AddAsync(orderItem);
-            //}
+         await _orderRepository.AddAsync(orderMap,cancellationToken);
 
+
+           
             return new() 
             { 
              Message="Başarılı"

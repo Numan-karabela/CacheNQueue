@@ -22,8 +22,8 @@ namespace CacheNQueue.Application.Features.OrderItemsMed
         public  async Task<List<GetOrderItemsByOrderIdQueryResponse>> Handle(GetOrderItemsByOrderIdQueryRequest request, CancellationToken cancellationToken)
         {
             var a = await _orderItemRepository.GetOrderItemsByOrderIdAsync(request.id, cancellationToken);
-            var productDtos = a.Select(x => GetOrderItemsByOrderIdQueryResponse.Map(x)); 
-            return new List<GetOrderItemsByOrderIdQueryResponse>(productDtos);
+            //var productDtos = a.Select(x => GetOrderItemsByOrderIdQueryResponse.Map(x)); 
+            return new  ();
         }
     }
 }

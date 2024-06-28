@@ -12,29 +12,25 @@ namespace CacheNQueue.Application.Features.OrderMed.Add
 {
     
     public class CreateOrderCommandRequest : IRequest<CreateOrderCommandResponse>
-    { 
+    {
         public Guid UserId { get; set; } // Kullanıcı kimlik numarası  
-        public string OrderStatus { get; set; }
-        public decimal TotalAmount { get; set; }
+        public Guid ProductId { get; set; }//sipariş 
+        public string Address { get; set; }//Address
+        public string OrderStatus { get; set; } = "Şipariş Hazırlanıyor";
+        public decimal UnitPrice { get; set; } // Birim fiyatı
 
-
-
-
-        public List<OrderItem> OrderItem1 { get; set; }
-        public static Order Map(CreateOrderCommandRequest request,AppUser appUser,OrderItem orderItem,Product product)
+        public static Order Map(CreateOrderCommandRequest request)
         {
             return new Order()
             {
-                Id=new Guid(),
-                UserId = request.UserId,
-                User = appUser,
+                UserId=request.UserId,
+                ProductId=request.ProductId,
+                Address=request.Address,
                 OrderStatus=request.OrderStatus,
-                TotalAmount=request.TotalAmount,
-                OrderItems=request.OrderItem1,
+                UnitPrice=request.UnitPrice,
                 
-            };
-
-
+            }; 
         }
     }
+    
 }

@@ -18,7 +18,7 @@ namespace CacheNQueue.Application.Repositories.OrderItemsRepository
         public async Task<List<OrderItem>> GetOrderItemsByOrderIdAsync(Guid orderId, CancellationToken cancellationToken)
         {
             return await _context.OrderItems
-                                 .Where(oi => oi.OrderId == orderId)
+                                 .Where(oi => oi.Id== orderId)
                                  .Include(oi => oi.Product)
                                  .ToListAsync(cancellationToken);
         }

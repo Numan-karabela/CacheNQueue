@@ -20,7 +20,7 @@ namespace CacheNQueue.Application.Features.OrderMed
         public async Task<GetOrderByIdQueryrResponse> Handle(GetOrderByIdQueryRequest request, CancellationToken cancellationToken)
         {
             var order= await _orderRepository.GetByIdAsync(request.OrderId,cancellationToken);
-            return  GetOrderByIdQueryrResponse.Map(order);
+            return new();
         }
     }
 }

@@ -20,7 +20,7 @@ namespace CacheNQueue.Application.Repositories.OrderRepository
         {
             return await _context.Orders
                                  .Where(o => o.UserId == userId)
-                                 .Include(o => o.OrderItems)
+                                 .Include(o => o.OrderStatus)
                                  .ToListAsync();
         }
 

@@ -1,4 +1,5 @@
 ﻿using CacheNQueue.Domain.Entities.Comman;
+using CacheNQueue.Domain.Entities.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +10,8 @@ namespace CacheNQueue.Domain.Entities
 {
     public class OrderItem : BaseEntity// Sipariş durumu
     {
-        public Guid OrderId { get; set; } // Sipariş kimlik numarası  
-        public Guid ProductId { get; set; } // Ürün kimlik numarası  
-        public decimal UnitPrice { get; set; } // Birim fiyatı   
+         
+        public AppUser  appUser { get; set; } // Şipariş veren kimlik numarası  
         public Order Order { get; set; } // İlgili sipariş
         public Product Product { get; set; } // İlgili ürün
     }
