@@ -9,7 +9,6 @@ namespace CacheNQueue.Application.Repositories.OrderItemsRepository
 {
     public interface IOrderItemRepository:IRepositoryAsync<OrderItem> 
     {
-        Task<List<OrderItem>> GetOrderItemsByOrderIdAsync(Guid orderId,CancellationToken cancellationToken);
-
+        Task<List<OrderItem>> GetOrderItemsByOrderIdAsync(Guid orderId,CancellationToken cancellationToken); 
     }
 }

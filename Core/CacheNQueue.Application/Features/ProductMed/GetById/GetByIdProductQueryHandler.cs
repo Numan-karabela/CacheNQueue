@@ -12,14 +12,12 @@ namespace CacheNQueue.Application.Med.ProductMed.GetById
 {
     public class GetByIdProductQueryHandler : IRequestHandler<GetByIdProductQueryRequest, GetByIdProductQueryResponse>
     {
-        readonly IProductRepository productRepository;
-        readonly IMapper mapper;
+        readonly IProductRepository productRepository; 
         readonly IRedisCacheService _cacheService;
 
-        public GetByIdProductQueryHandler(IProductRepository productRepository, IMapper mapper, IRedisCacheService cacheService = null)
+        public GetByIdProductQueryHandler(IProductRepository productRepository, IRedisCacheService cacheService = null)
         {
-            this.productRepository = productRepository;
-            this.mapper = mapper;
+            this.productRepository = productRepository; 
             _cacheService = cacheService;
         }
 
@@ -28,7 +26,7 @@ namespace CacheNQueue.Application.Med.ProductMed.GetById
             var product = await _cacheService.GetByıdAsync(request.Id, cancellationToken);
             if (product == null)
             {
-                return null;
+                product =await productRepository.GetByIdAsync(request.Id, cancellationToken);
             }
             return GetByIdProductQueryResponse.Map(product);
 

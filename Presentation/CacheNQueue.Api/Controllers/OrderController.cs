@@ -1,4 +1,5 @@
-﻿using CacheNQueue.Application.Features.OrderMed.Add;
+﻿using CacheNQueue.Application.Features.OrderMed;
+using CacheNQueue.Application.Features.OrderMed.Add;
 using CacheNQueue.Application.Med.ProductMed.Add;
 using CacheNQueue.Application.Med.ProductMed.GetById;
 using MediatR;
@@ -26,9 +27,9 @@ namespace CacheNQueue.Api.Controllers
 
         }
         [HttpGet("Id")]
-        public async Task<IActionResult> GettById(CreateOrderCommandRequest request)
+        public async Task<IActionResult> GettById(GetOrderByIdQueryRequest request)
         { 
-            CreateOrderCommandResponse response = await mediator.Send(request);
+            GetOrderByIdQueryrResponse response = await mediator.Send(request);
             return Ok(response);
         }
     }

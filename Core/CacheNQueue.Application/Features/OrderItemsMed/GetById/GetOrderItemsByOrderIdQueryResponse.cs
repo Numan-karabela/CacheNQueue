@@ -11,10 +11,8 @@ namespace CacheNQueue.Application.Features.OrderItemsMed
     public class GetOrderItemsByOrderIdQueryResponse
     {
         public Guid OrderId { get; set; } // Sipariş kimlik numarası  
-        public Guid ProductId { get; set; } // Ürün kimlik numarası 
-        public Guid Quantity { get; set; } // Ürün miktarı   
-        public decimal UnitPrice { get; set; } // Birim fiyatı  
-        public decimal TotalPrice { get; set; } // Toplam fiyat 
+        public Guid ProductId { get; set; } // Ürün kimlik numarası  
+        public decimal UnitPrice { get; set; } // Birim fiyatı   
 
         public Order Order { get; set; } // İlgili sipariş
         public Product Product { get; set; } // İlgili ürün
@@ -24,12 +22,10 @@ namespace CacheNQueue.Application.Features.OrderItemsMed
         {
             return new GetOrderItemsByOrderIdQueryResponse()
             {
-
-                Quantity=order.Quantity,
+                 
                 ProductId=order.ProductId,
                 OrderId=order.OrderId,
-                UnitPrice = order.UnitPrice,
-                TotalPrice = order.TotalPrice,
+                UnitPrice = order.UnitPrice, 
                 Product = order.Product,
                 Order= order.Order,
 

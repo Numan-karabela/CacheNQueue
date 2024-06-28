@@ -1,4 +1,5 @@
 ﻿using CacheNQueue.Domain.Entities;
+using CacheNQueue.Domain.Entities.Identity;
 using CacheNQueue.Persistence.Context;
 using CacheNQueue.Persistence.Repositorty;
 using Microsoft.EntityFrameworkCore;
@@ -21,6 +22,11 @@ namespace CacheNQueue.Application.Repositories.OrderRepository
                                  .Where(o => o.UserId == userId)
                                  .Include(o => o.OrderItems)
                                  .ToListAsync();
+        }
+
+        public async Task<AppUser> GetUserAsync(Guid userId)
+        {
+            return await _context.Users.FirstOrDefaultAsync(o => o.Id == Convert.ToString(userId));
         }
     }
 }

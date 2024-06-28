@@ -1,4 +1,5 @@
-﻿using CacheNQueue.Domain.Entities;
+﻿using CacheNQueue.Application.Repositories.OrderRepository;
+using CacheNQueue.Domain.Entities;
 using CacheNQueue.Domain.Entities.Identity;
 using MediatR;
 using System;
@@ -9,21 +10,31 @@ using System.Threading.Tasks;
 
 namespace CacheNQueue.Application.Features.OrderMed.Add
 {
+    
     public class CreateOrderCommandRequest : IRequest<CreateOrderCommandResponse>
-    {
-        public Order Order { get; set; }
-        public List<OrderItem> OrderItems { get; set; } 
-        public string OrderStatus { get; set; } // Sipariş durumu 
-        public decimal TotalAmount { get; set; } // Toplam tutar  
+    { 
+        public Guid UserId { get; set; } // Kullanıcı kimlik numarası  
+        public string OrderStatus { get; set; }
+        public decimal TotalAmount { get; set; }
 
-        public AppUser User { get; set; } // Siparişi veren kullanıcı 
-        public CreateOrderCommandRequest(Order order, List<OrderItem> orderItems,Guid UserId, string orderStatus,decimal totalAmount, AppUser appUser)
+
+
+
+        public List<OrderItem> OrderItem1 { get; set; }
+        public static Order Map(CreateOrderCommandRequest request,AppUser appUser,OrderItem orderItem,Product product)
         {
-            Order = order;
-            OrderItems = orderItems;
-            OrderStatus = orderStatus;
-            TotalAmount = totalAmount;
-            User = appUser;
+            return new Order()
+            {
+                Id=new Guid(),
+                UserId = request.UserId,
+                User = appUser,
+                OrderStatus=request.OrderStatus,
+                TotalAmount=request.TotalAmount,
+                OrderItems=request.OrderItem1,
+                
+            };
+
+
         }
     }
 }

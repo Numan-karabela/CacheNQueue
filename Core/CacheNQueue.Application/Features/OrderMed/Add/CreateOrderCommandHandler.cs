@@ -1,5 +1,7 @@
-﻿using CacheNQueue.Application.Repositories.OrderItemsRepository;
+﻿using AutoMapper;
+using CacheNQueue.Application.Repositories.OrderItemsRepository;
 using CacheNQueue.Application.Repositories.OrderRepository;
+using CacheNQueue.Domain.Entities;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -13,24 +15,29 @@ namespace CacheNQueue.Application.Features.OrderMed.Add
     {
         private readonly IOrderRepository _orderRepository;
         private readonly IOrderItemRepository _orderItemRepository;
+        private readonly IMapper mapper;
 
-        public CreateOrderCommandHandler(IOrderRepository orderRepository, IOrderItemRepository orderItemRepository)
+        public CreateOrderCommandHandler(IOrderRepository orderRepository, IOrderItemRepository orderItemRepository, IMapper mapper)
         {
             _orderRepository = orderRepository;
             _orderItemRepository = orderItemRepository;
+            this.mapper = mapper;
         }
 
-       
 
-       async  Task<CreateOrderCommandResponse> IRequestHandler<CreateOrderCommandRequest, CreateOrderCommandResponse>.Handle(CreateOrderCommandRequest request, CancellationToken cancellationToken)
+
+        async  Task<CreateOrderCommandResponse> IRequestHandler<CreateOrderCommandRequest, CreateOrderCommandResponse>.Handle(CreateOrderCommandRequest request, CancellationToken cancellationToken)
         {
-            await _orderRepository.AddAsync(request.Order, cancellationToken);
 
-            foreach (var orderItem in request.OrderItems)
-            {
-                orderItem.OrderId = request.Order.Id;
-                await _orderItemRepository.AddAsync(orderItem, cancellationToken);
-            }
+           var a = await _orderRepository.GetUserAsync(request.UserId); 
+           var map= CreateOrderCommandRequest.Map(request,a);
+           await _orderRepository.AddAsync(map,cancellationToken);
+
+            //foreach (var orderItem in request.OrderItems)
+            //{
+            //    orderItem.OrderId = request.Order.Id;
+            //    await _orderItemRepository.AddAsync(orderItem);
+            //}
 
             return new() 
             { 

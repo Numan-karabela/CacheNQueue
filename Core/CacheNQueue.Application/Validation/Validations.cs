@@ -37,13 +37,12 @@ namespace CacheNQueue.Application.Validation
     }
     public class OrderValidation : AbstractValidator<CreateOrderCommandRequest>
     {
-        public OrderValidation()
-        {
-            RuleFor(x => x.User).NotNull().NotEmpty().WithMessage("Boş brakılamaz");
-            RuleFor(x => x.Order).NotNull().NotEmpty().WithMessage("Boş brakılamaz");
-            RuleFor(x => x.OrderItems).NotNull().NotEmpty().WithMessage("Boş brakılamaz");
-            RuleFor(x => x.OrderStatus).NotNull().NotEmpty().WithMessage("Boş brakılamaz"); 
-        } 
+        //public OrderValidation()
+        //{
+        //    RuleFor(x => x.Order.User).NotNull().NotEmpty().WithMessage("Boş brakılamaz");
+        //    RuleFor(x => x.Order).NotNull().NotEmpty().WithMessage("Boş brakılamaz");
+        //    RuleFor(x => x.OrderItems).NotNull().NotEmpty().WithMessage("Boş brakılamaz"); 
+        //} 
     } 
     public class UserValidation : AbstractValidator<CreateUserCommandRequest>
     {

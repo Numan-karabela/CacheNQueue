@@ -10,9 +10,9 @@ namespace CacheNQueue.Domain.Entities
 {
     public class Order : BaseEntity//sipariş
     {
-        public Guid UserId { get; set; } // Kullanıcı kimlik numarası  
-        public string OrderStatus { get; set; } // Sipariş durumu 
+        public string OrderStatus { get; set; } = "şipariş verildi";
         public decimal TotalAmount { get; set; } // Toplam tutar  
+        public Guid UserId { get; set; } // Kullanıcı kimlik numarası  
 
         public AppUser User { get; set; } // Siparişi veren kullanıcı
         public ICollection<OrderItem> OrderItems { get; set; } // Siparişin detayları
