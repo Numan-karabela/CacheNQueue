@@ -11,7 +11,7 @@ namespace CacheNQueue.Domain.Entities
     public class OrderItem : BaseEntity// Sipariş durumu
     {
          
-        public AppUser  appUser { get; set; } // Şipariş veren kimlik numarası  
+        public AppUser  appUser { get; set; } 
         public Order Order { get; set; } // İlgili sipariş
         public Product Product { get; set; } // İlgili ürün
     }

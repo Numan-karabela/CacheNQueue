@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CacheNQueue.Persistence.Migrations
 {
     [DbContext(typeof(CacheNQueueDbContext))]
-    [Migration("20240628225244_mig_1")]
+    [Migration("20240629123510_mig_1")]
     partial class mig_1
     {
         /// <inheritdoc />
@@ -141,8 +141,8 @@ namespace CacheNQueue.Persistence.Migrations
                     b.Property<Guid>("ProductId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<decimal>("UnitPrice")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<int>("UnitPrice")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");

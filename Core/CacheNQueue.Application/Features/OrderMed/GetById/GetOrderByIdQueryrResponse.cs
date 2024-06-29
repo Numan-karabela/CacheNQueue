@@ -11,6 +11,6 @@ namespace CacheNQueue.Application.Features.OrderMed
 {
     public class GetOrderByIdQueryrResponse
     {
-       
+        public Product Product { get; set; } 
     }
 }

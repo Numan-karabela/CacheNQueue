@@ -22,8 +22,8 @@ namespace CacheNQueue.Api.Controllers
         [HttpGet("Id")]
         public  async Task<IActionResult> GettById(Guid id)
         {
-            GetOrderItemsByOrderIdQueryRequest request = new() { id = id};
-           List<GetOrderItemsByOrderIdQueryResponse> response =await mediator.Send(request);
+            GetOrderItemsByOrderIdQueryRequest request = new() {  Id= id};
+           GetOrderItemsByOrderIdQueryResponse response =await mediator.Send(request);
             return Ok(response);
         }
     }

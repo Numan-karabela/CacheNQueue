@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace CacheNQueue.Domain.Entities
 {
-    public class Order : BaseEntity//sipariş
+    public class Order : BaseEntity 
     {
-        public Guid UserId { get; set; } // Kullanıcı kimlik numarası  
-        public Guid ProductId { get; set; }//sipariş 
-        public string Address { get; set; }//Address
-        public string OrderStatus { get; set; } = "Şipariş Hazırlanıyor";
-        public decimal UnitPrice { get; set; } // Birim fiyatı
+        public Guid UserId { get; set; }
+        public Guid ProductId { get; set; }
+        public string Address { get; set; } 
+        public string OrderStatus { get; set; }
+        public int UnitPrice { get; set; } 
 
     }
 
