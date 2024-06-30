@@ -24,10 +24,10 @@ namespace CacheNQueue.Application.Features.OrderMed.Add
         {
             return new Order()
             {
-                UserId=request.UserId,
-                ProductId=request.ProductId,
-                Address=request.Address,
-                OrderStatus=request.OrderStatus,
+                UserId = request.UserId,
+                ProductId = request.ProductId,
+                Address = request.Address,
+                OrderStatus = "Şipariş alındı",
                 UnitPrice=request.UnitPrice,
                 
             }; 

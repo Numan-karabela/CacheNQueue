@@ -22,25 +22,23 @@ namespace CacheNQueue.Persistence.Repositorty
 
         public async Task<T> GetByIdAsync(Guid id, CancellationToken cancellationToken)
         {
-            return await _context.Set<T>().FindAsync(id);
+            return await _context.Set<T>().FindAsync(id,cancellationToken);
         }
 
         public async Task<List<T>> GetAllAsync(CancellationToken cancellationToken)
         {
-            return await _context.Set<T>().ToListAsync();
+            return await _context.Set<T>().AsNoTracking().ToListAsync(cancellationToken);
         }
-
          
-
         public async Task AddAsync(T entity, CancellationToken cancellationToken)
         {
-            await _context.Set<T>().AddAsync(entity);
+            await _context.Set<T>().AddAsync(entity, cancellationToken);
             await _context.SaveChangesAsync();
         }
 
         public async Task AddRangeAsync(List<T> entities, CancellationToken cancellationToken)
         {
-            await _context.Set<T>().AddRangeAsync(entities);
+            await _context.Set<T>().AddRangeAsync(entities, cancellationToken);
             await _context.SaveChangesAsync();
         }
 
@@ -54,8 +52,6 @@ namespace CacheNQueue.Persistence.Repositorty
         {
             _context.Set<T>().Remove(entity);
             _context.SaveChanges();
-        }
-
-         
+        } 
     }
 }

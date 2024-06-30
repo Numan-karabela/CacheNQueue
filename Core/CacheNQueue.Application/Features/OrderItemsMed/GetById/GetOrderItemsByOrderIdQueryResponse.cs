@@ -26,15 +26,15 @@ namespace CacheNQueue.Application.Features.OrderItemsMed
         {
             return new GetOrderItemsByOrderIdQueryResponse
             {
-               
-                Name = orderItem.Product.Name,
+
+                Surname = orderItem.appUser.Surname,
+                Email = orderItem.appUser.Email,
+                Address = orderItem.Order.Address,
+                Name = $"Ürün ismi:{orderItem.Product.Name}",
                 Description = orderItem.Product.Description,
                 Price= orderItem.Product.Price,
-                Address=orderItem.Order.Address,
                 OrderStatus=orderItem.Order.OrderStatus,
                 UnitPrice=orderItem.Order.UnitPrice,
-                Surname=orderItem.appUser.Surname,
-                Email=orderItem.appUser.Email,   
                 
                
             };

@@ -19,6 +19,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CacheNQueue.Persistence", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CacheNQueue.Api", "Presentation\CacheNQueue.Api\CacheNQueue.Api.csproj", "{3964B1C0-F144-426C-9BD4-4956626E101C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{1532C897-FEC4-4502-8E6F-7EE3B860D3FF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CacheNQueueRabitMQ.Service", "CacheNQueueRabitMQ.Service\CacheNQueueRabitMQ.Service.csproj", "{B7A2990B-7FA9-4E95-9BC1-A26C38DED439}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +49,10 @@ Global
 		{3964B1C0-F144-426C-9BD4-4956626E101C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3964B1C0-F144-426C-9BD4-4956626E101C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3964B1C0-F144-426C-9BD4-4956626E101C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7A2990B-7FA9-4E95-9BC1-A26C38DED439}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7A2990B-7FA9-4E95-9BC1-A26C38DED439}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7A2990B-7FA9-4E95-9BC1-A26C38DED439}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7A2990B-7FA9-4E95-9BC1-A26C38DED439}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -55,6 +63,7 @@ Global
 		{217B894B-5C22-4E85-9B25-D95CAACFC259} = {1DE53BDE-FD4A-49B7-8DA1-53385853A27F}
 		{EA8E7D42-4961-4595-88DE-17F348F54E0B} = {1DE53BDE-FD4A-49B7-8DA1-53385853A27F}
 		{3964B1C0-F144-426C-9BD4-4956626E101C} = {47C4D41F-AD18-40F9-A227-9D4462664705}
+		{B7A2990B-7FA9-4E95-9BC1-A26C38DED439} = {1532C897-FEC4-4502-8E6F-7EE3B860D3FF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {514DC77C-0D83-4363-B0EE-6534EA46605B}
