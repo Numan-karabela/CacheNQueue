@@ -26,10 +26,11 @@ namespace CacheNQueue.Api.Controllers
             return Ok(response);
 
         }
-        [HttpGet("Id")]
-        public async Task<IActionResult> GettById(GetOrderByIdQueryRequest request)
-        { 
-            GetOrderByIdQueryrResponse response = await mediator.Send(request);
+        [HttpGet("GetAll")]
+        public async Task<IActionResult> GettById()
+        {
+            GetAllOrderQueryRequest request = new GetAllOrderQueryRequest();
+          List<GetAllOrderQueryrResponse> response = await mediator.Send(request);
             return Ok(response);
         }
     }

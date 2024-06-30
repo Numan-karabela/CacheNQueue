@@ -20,22 +20,23 @@ namespace CacheNQueue.Application.Features.OrderItemsMed
         public string OrderStatus { get; set; }
         public int UnitPrice { get; set; }
         public string Surname { get; set; }
-        public string Email { get; set; }
-        public string PhoneNumber { get; set; }
+        public string Email { get; set; } 
 
-        public static GetOrderItemsByOrderIdQueryResponse Map(Product product, AppUser user,Order order)
+        public static GetOrderItemsByOrderIdQueryResponse Map( OrderItem orderItem)
         {
             return new GetOrderItemsByOrderIdQueryResponse
             {
-                Name = product.Name,
-                Description = product.Description,
-                Price = product.Price,
-                Address = order.Address,
-                OrderStatus = order.OrderStatus,
-                UnitPrice = order.UnitPrice,
-                Surname = user.UserName,
-                Email = user.Email,
-                PhoneNumber = user.PhoneNumber
+               
+                Name = orderItem.Product.Name,
+                Description = orderItem.Product.Description,
+                Price= orderItem.Product.Price,
+                Address=orderItem.Order.Address,
+                OrderStatus=orderItem.Order.OrderStatus,
+                UnitPrice=orderItem.Order.UnitPrice,
+                Surname=orderItem.appUser.Surname,
+                Email=orderItem.appUser.Email,   
+                
+               
             };
 
 

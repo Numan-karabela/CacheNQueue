@@ -25,6 +25,10 @@ namespace CacheNQueue.Application.Med.ProductMed.Delete
 
 
            var product=await _productRepository.GetByIdAsync(request.Id,cancellationToken);
+            if (product==null)
+            {
+                throw new Exception("Böyle bir veri bulunamadı"); 
+            }
             await _cacheService.DeleteAsync(product.Id, cancellationToken);
 
             await _productRepository.RemoveAsync(product, cancellationToken);

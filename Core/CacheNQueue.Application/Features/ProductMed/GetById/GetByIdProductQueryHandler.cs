@@ -28,9 +28,12 @@ namespace CacheNQueue.Application.Med.ProductMed.GetById
             {
                 product =await productRepository.GetByIdAsync(request.Id, cancellationToken);
             }
-            return GetByIdProductQueryResponse.Map(product);
+            if (product!=null)
+            {
+                return GetByIdProductQueryResponse.Map(product);
+            }
 
-            
+            throw new Exception("Böyle bir veri bulunmamakta");
         }
     }
 }

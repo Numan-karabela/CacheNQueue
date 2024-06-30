@@ -20,6 +20,8 @@ namespace CacheNQueue.Application.Repositories.OrderItemsRepository
             return await _context.OrderItems
                                  .Where(oi => oi.Id== orderId)
                                  .Include(oi => oi.Product)
+                                 .Include(oi=>oi.appUser)
+                                 .Include(oi=>oi.Order)
                                  .ToListAsync(cancellationToken);
         }
     }

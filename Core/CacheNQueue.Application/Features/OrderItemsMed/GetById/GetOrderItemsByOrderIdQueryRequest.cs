@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CacheNQueue.Application.Features.OrderItemsMed
 {
-    public class GetOrderItemsByOrderIdQueryRequest : IRequest<GetOrderItemsByOrderIdQueryResponse>
+    public class GetOrderItemsByOrderIdQueryRequest : IRequest<List<GetOrderItemsByOrderIdQueryResponse>>
     {
         public Guid Id { get; set; }
 

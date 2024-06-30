@@ -16,10 +16,14 @@ namespace CacheNQueue.Application.Features.OrderMed.Add
     public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommandRequest, CreateOrderCommandResponse>
     {
         private readonly IOrderRepository _orderRepository;  
+        private readonly IOrderItemRepository _orderItemRepository;
+        private readonly IProductRepository _productRepository;
 
-        public CreateOrderCommandHandler(IOrderRepository orderRepository)
+        public CreateOrderCommandHandler(IOrderRepository orderRepository, IOrderItemRepository orderItemRepository, IProductRepository productRepository)
         {
-            _orderRepository = orderRepository;   
+            _orderRepository = orderRepository;
+            _orderItemRepository = orderItemRepository;
+            _productRepository = productRepository;
         }
 
 
@@ -28,16 +32,28 @@ namespace CacheNQueue.Application.Features.OrderMed.Add
         {
           
 
-           var orderMap =CreateOrderCommandRequest.Map(request);
+         var orderMap =CreateOrderCommandRequest.Map(request);
 
 
          await _orderRepository.AddAsync(orderMap,cancellationToken);
 
-
+          var user= await _orderRepository.GetUserAsync(request.UserId);
+           var product= await _productRepository.GetByIdAsync(request.ProductId,cancellationToken);
+            OrderItem orderItem = new()
+            {
+                Order = orderMap,
+                appUser = user,
+                Product = product,
+            };
+          await  _orderItemRepository.AddAsync(orderItem,cancellationToken);
            
+            
+            
+            
             return new() 
             { 
-             Message="Başarılı"
+             Message
+             ="Başarılı"
             };
         }
     }

@@ -12,26 +12,26 @@ using System.Threading.Tasks;
 
 namespace CacheNQueue.Application.Features.OrderItemsMed
 {
-    public class GetOrderItemsByOrderIdQueryHandler : IRequestHandler<GetOrderItemsByOrderIdQueryRequest,GetOrderItemsByOrderIdQueryResponse>
+    public class GetOrderItemsByOrderIdQueryHandler : IRequestHandler<GetOrderItemsByOrderIdQueryRequest,List<GetOrderItemsByOrderIdQueryResponse>>
     {
         private readonly IOrderItemRepository _orderItemRepository;
         private readonly IOrderRepository _orderRepository;
         private readonly IProductRepository _productRepository;
-        public GetOrderItemsByOrderIdQueryHandler(IOrderItemRepository orderItemRepository, IOrderRepository orderRepository)
+
+        public GetOrderItemsByOrderIdQueryHandler(IOrderItemRepository orderItemRepository, IOrderRepository orderRepository, IProductRepository productRepository)
         {
             _orderItemRepository = orderItemRepository;
             _orderRepository = orderRepository;
+            _productRepository = productRepository;
         }
 
-        public  async Task<GetOrderItemsByOrderIdQueryResponse> Handle(GetOrderItemsByOrderIdQueryRequest request, CancellationToken cancellationToken)
+        public  async Task<List<GetOrderItemsByOrderIdQueryResponse>> Handle(GetOrderItemsByOrderIdQueryRequest request, CancellationToken cancellationToken)
         {
-            var order =  await _orderRepository.GetByIdAsync(request.Id,cancellationToken);
-            var product = await _productRepository.GetByIdAsync(order.ProductId,cancellationToken);
-            var user =   await _orderRepository.GetUserAsync(order.UserId);
+          var orderItems= await _orderItemRepository.GetOrderItemsByOrderIdAsync(request.Id,cancellationToken);
+            var productDtos = orderItems.Select(x => GetOrderItemsByOrderIdQueryResponse.Map(x));
 
-          return  GetOrderItemsByOrderIdQueryResponse.Map(product,user,order);
-             
-            
+
+            return new List<GetOrderItemsByOrderIdQueryResponse>(productDtos);
         }
     }
 }

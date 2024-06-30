@@ -13,5 +13,6 @@ namespace CacheNQueue.Application.Cache
         Task<List<Product>> GetAllAsync( CancellationToken cancellationToken);
         Task SetAsync (Product product,CancellationToken cancellationToken);
         Task DeleteAsync(Guid key,CancellationToken cancellationToken);
+        Task UpdatedAsync(Product product,CancellationToken cancellationToken);
     }
 }

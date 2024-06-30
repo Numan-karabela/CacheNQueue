@@ -12,11 +12,10 @@ namespace CacheNQueue.Application.Med.ProductMed.GetById
         public string Name { get; set; }
         public string Description { get; set; }
         public decimal Price { get; set; }
-        public int Stock { get; set; }
-
-
+        public int Stock { get; set; } 
         public static GetByIdProductQueryResponse Map(Product product)
         {
+            
             return new GetByIdProductQueryResponse()
             {
                 Name = product.Name,

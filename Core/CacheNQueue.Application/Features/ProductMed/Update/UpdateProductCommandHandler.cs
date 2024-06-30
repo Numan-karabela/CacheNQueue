@@ -26,7 +26,7 @@ namespace CacheNQueue.Application.Med.ProductMed.Update
            Product product= UpdateProductCommandRequest.Map(request);
 
            await _productRepository.UpdateAsync(product, cancellationToken);
-
+            await _cacheService.UpdatedAsync(product,cancellationToken);
             return new()
             {
                 Message="başarılı"

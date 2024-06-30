@@ -9,8 +9,20 @@ using System.Threading.Tasks;
 
 namespace CacheNQueue.Application.Features.OrderMed
 {
-    public class GetOrderByIdQueryrResponse
+    public class GetAllOrderQueryrResponse
     {
-        public Product Product { get; set; } 
+        public Order order { get; set; }
+        
+        
+
+        public static GetAllOrderQueryrResponse Map(Order order)
+        {
+            return new GetAllOrderQueryrResponse
+            {
+             order = order, 
+            };
+
+
+        }
     }
 }

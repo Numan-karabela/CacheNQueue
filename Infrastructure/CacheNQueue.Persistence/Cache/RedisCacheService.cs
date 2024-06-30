@@ -83,6 +83,7 @@ namespace CacheNQueue.Application.Cache
 
         public async Task SetAllAsync(List<Product> product, CancellationToken cancellationToken) 
         {
+            await cache.RemoveAsync(configuration["Redis:GettAllRedis"]);
             await cache.SetStringAsync(configuration["Redis:GettAllRedis"], JsonSerializer.Serialize(product)); 
         }
 
@@ -99,6 +100,18 @@ namespace CacheNQueue.Application.Cache
             var products = JsonSerializer.Deserialize<List<Product>>(await cache.GetStringAsync(configuration["Redis:GettAllRedis"]));
             await cache.RemoveAsync($"{Convert.ToString(key)}");
             products = products.Where(x => x.Id != key).ToList();
+            await SetAllAsync(products, cancellationToken);
+
+        }
+
+        public async Task  UpdatedAsync(Product product, CancellationToken cancellationToken)
+        {
+            var products = JsonSerializer.Deserialize<List<Product>>(await cache.GetStringAsync(configuration["Redis:GettAllRedis"]));
+            var productkey = Convert.ToString(product.Id);
+            await cache.RemoveAsync(productkey);
+            products = products.Where(x => x.Id != product.Id).ToList();
+            Product productsUpdate = new() { Id = product.Id, Name = product.Name, Price = product.Price, Stock = product.Stock, Description = product.Description};
+            products.Add(productsUpdate);
             await SetAllAsync(products, cancellationToken);
 
         }
