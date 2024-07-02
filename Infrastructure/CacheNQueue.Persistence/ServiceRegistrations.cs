@@ -1,4 +1,5 @@
-﻿using CacheNQueue.Application.Cache;
+﻿using CacheNQueue.Application.Abstractions.Cache;
+using CacheNQueue.Application.Cache;
 using CacheNQueue.Application.Repositories.OrderItemsRepository;
 using CacheNQueue.Application.Repositories.OrderRepository;
 using CacheNQueue.Application.Repositories.ProductRepository;

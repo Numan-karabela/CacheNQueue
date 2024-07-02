@@ -1,4 +1,5 @@
-﻿using CacheNQueue.Application.Repositories.ProductRepository;
+﻿using CacheNQueue.Application.Abstractions.Cache;
+using CacheNQueue.Application.Repositories.ProductRepository;
 using CacheNQueue.Domain.Entities;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Caching.Distributed;

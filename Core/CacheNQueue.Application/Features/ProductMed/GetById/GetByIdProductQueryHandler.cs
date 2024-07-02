@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using CacheNQueue.Application.Cache;
+using CacheNQueue.Application.Abstractions.Cache;
 using CacheNQueue.Application.Repositories.ProductRepository;
 using MediatR;
 using System;

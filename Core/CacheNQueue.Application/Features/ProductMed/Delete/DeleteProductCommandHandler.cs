@@ -1,4 +1,4 @@
-﻿using CacheNQueue.Application.Cache;
+﻿using CacheNQueue.Application.Abstractions.Cache;
 using CacheNQueue.Application.Repositories.ProductRepository;
 using CacheNQueue.Domain.Entities;
 using MediatR;
