@@ -37,12 +37,15 @@ namespace CacheNQueue.Application.Validation
     }
     public class OrderValidation : AbstractValidator<CreateOrderCommandRequest>
     {
-        //public OrderValidation()
-        //{
-        //    RuleFor(x => x.Order.User).NotNull().NotEmpty().WithMessage("Boş brakılamaz");
-        //    RuleFor(x => x.Order).NotNull().NotEmpty().WithMessage("Boş brakılamaz");
-        //    RuleFor(x => x.OrderItems).NotNull().NotEmpty().WithMessage("Boş brakılamaz"); 
-        //} 
+        public OrderValidation()
+        {
+            RuleFor(x => x.Address).NotNull().NotEmpty().WithMessage("Boş brakılamaz");
+            RuleFor(x => x.UserId).NotNull().NotEmpty().WithMessage("Boş brakılamaz");
+            RuleFor(x => x.ProductId).NotNull().NotEmpty().WithMessage("Boş brakılamaz");
+            RuleFor(x => x.UnitPrice).NotNull().NotEmpty().WithMessage("Boş brakılamaz");
+            RuleFor(x => x.OrderStatus).NotNull().NotEmpty().WithMessage("Boş brakılamaz");
+
+        }
     } 
     public class UserValidation : AbstractValidator<CreateUserCommandRequest>
     {
@@ -79,6 +82,6 @@ namespace CacheNQueue.Application.Validation
                .MaximumLength(20)
                .MinimumLength(2)
                .WithMessage("5-10 değer aralığında bir kullanıcı adı giriniz");
-        }
+        } 
     }
 }

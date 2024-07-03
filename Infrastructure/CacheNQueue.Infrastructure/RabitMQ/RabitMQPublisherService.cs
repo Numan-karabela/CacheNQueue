@@ -13,7 +13,7 @@ namespace CacheNQueue.Infrastructure.RabitMQ
 {
     public class RabitMQPublisherService : IRabitMQService
     {
-        public IConfiguration _configuration;
+        private readonly IConfiguration _configuration;
 
         public RabitMQPublisherService(IConfiguration configuration)
         {
