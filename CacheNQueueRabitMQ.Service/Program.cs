@@ -1,33 +1,28 @@
-﻿
+﻿﻿
 using RabbitMQ.Client;
+using RabbitMQ.Client.Events;
 using System.Text;
 
-string anahtar;
-Console.WriteLine("Yapmak istediğiniz işlemi berlirtiniz");
-Console.WriteLine("Mail servisi için 1");
-Console.WriteLine("SMS sevis için 2");
-Console.WriteLine("Yazınız");
-int a = Convert.ToInt32(Console.ReadLine());
-Console.WriteLine("Mesajınızı girinizz");
-string mesaj = Convert.ToString(Console.ReadLine());
-
-anahtar = Convert.ToString(a);
-Mesaj(mesaj, anahtar);
-
-static void Mesaj(string? mesaj, string anahtar)
-{
-    var factory = new ConnectionFactory();
-    factory.Uri = new Uri("amqps://cbxmlocy:S38I2EJv1lZ0U2N4yu1YRD49zRMUbRkd@cow.rmq2.cloudamqp.com/cbxmlocy");
-    using var connection = factory.CreateConnection();
-    var channel = connection.CreateModel();
+var factory = new ConnectionFactory();
+factory.Uri = new Uri("amqps://cbxmlocy:S38I2EJv1lZ0U2N4yu1YRD49zRMUbRkd@cow.rmq2.cloudamqp.com/cbxmlocy");
 
 
-    channel.QueueDeclare(anahtar, true, false, false);//RabbitMQ gönderdiğimiz kuyruk ismi
+using var connection = factory.CreateConnection();
+var channel = connection.CreateModel();
 
 
-    var body = Encoding.UTF8.GetBytes(mesaj);
 
-    channel.BasicPublish(string.Empty, anahtar, null, body);//Verinin RabbitMQ’ye gönderildiği yer.
-    Console.WriteLine("OKey");
-}
+channel.QueueDeclare("Order", true, false, false);//kullandığımız kuyruk sistemi ismi 
+
+var consumer = new EventingBasicConsumer(channel);
+
+channel.BasicConsume("Order", true, consumer);
+consumer.Received += Consumer_Received;
 Console.ReadLine();
+
+
+void Consumer_Received(object? sender, BasicDeliverEventArgs e)
+{
+    //gelen siparişi işlem yaptımız mail veya hesahangibir işlem yaptığımızdaki kısım burasıdır
+    Console.WriteLine("Gelen mesaj:" + Encoding.UTF8.GetString(e.Body.ToArray()));
+}

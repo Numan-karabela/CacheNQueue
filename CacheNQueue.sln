@@ -19,9 +19,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CacheNQueue.Persistence", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CacheNQueue.Api", "Presentation\CacheNQueue.Api\CacheNQueue.Api.csproj", "{3964B1C0-F144-426C-9BD4-4956626E101C}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{1532C897-FEC4-4502-8E6F-7EE3B860D3FF}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RabıtMQConsumerServices", "RabıtMQConsumerServices", "{1532C897-FEC4-4502-8E6F-7EE3B860D3FF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CacheNQueueRabitMQ.Service", "CacheNQueueRabitMQ.Service\CacheNQueueRabitMQ.Service.csproj", "{B7A2990B-7FA9-4E95-9BC1-A26C38DED439}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CacheNQueueRabitMQConsumer.Service", "CacheNQueueRabitMQ.Service\CacheNQueueRabitMQConsumer.Service.csproj", "{B7A2990B-7FA9-4E95-9BC1-A26C38DED439}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

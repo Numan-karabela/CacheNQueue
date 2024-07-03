@@ -20,22 +20,22 @@ namespace CacheNQueue.Infrastructure.RabitMQ
             _configuration = configuration;
         }
 
-        public void Message(string Message, string QueueKey)
+        public async Task  Message(string Message, string QueueKey)
         {   
+            
                 var factory = new ConnectionFactory();
                 factory.Uri = new Uri(_configuration.GetConnectionString("RabitMQ:Key"));
                 using var connection = factory.CreateConnection();
                 using var channel = connection.CreateModel();
              
-                channel.QueueDeclare(QueueKey, true, false, false);//RabbitMQ gönderdiğimiz kuyruk ismi 
+                channel.QueueDeclare(QueueKey, true, false, false); 
 
                 var body = Encoding.UTF8.GetBytes(Message);
 
-                channel.BasicPublish(string.Empty, QueueKey, null, body);//Verinin RabbitMQ’ye gönderildiği yer.
+                channel.BasicPublish(string.Empty, QueueKey, null, body); 
                 
 
                 
-            }
-         
+            } 
     }
 }

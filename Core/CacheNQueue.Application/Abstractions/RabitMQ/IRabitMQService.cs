@@ -8,6 +8,6 @@ namespace CacheNQueue.Application.Abstractions.RabitMQ
 {
     public interface IRabitMQService
     {
-        void Message(string Message,string QueueKey);
+     Task Message(string Message,string QueueKey);
     }
 }
