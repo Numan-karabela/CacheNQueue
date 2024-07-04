@@ -1,5 +1,6 @@
 ﻿using Application.Abstractions.Token;
 using AutoMapper;
+using CacheNQueue.Application.Abstractions.Cache;
 using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,7 +20,7 @@ namespace CacheNQueue.Application
             var assm=Assembly.GetExecutingAssembly();
             services.AddFluentValidation(p => p.RegisterValidatorsFromAssembly(assm)); 
             services.AddMediatR(assm);
-            services.AddAutoMapper(assm);
+            services.AddAutoMapper(assm); 
 
 
         }

@@ -1,5 +1,7 @@
 ﻿using Application.Abstractions.Token;
+using CacheNQueue.Application.Abstractions.Cache;
 using CacheNQueue.Application.Abstractions.RabitMQ;
+using CacheNQueue.Application.Cache;
 using CacheNQueue.Infrastructure.RabitMQ;
 using CacheNQueue.Infrastructure.Services.Token;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,8 +19,8 @@ namespace CacheNQueue.Infrastructure
         public static void AddInfrastructureService(this IServiceCollection services)
         {
             services.AddScoped<ITokenHandler,TokenHandler>();
-            services.AddTransient<IRabitMQService,RabitMQPublisherService>();
-
+            services.AddTransient<IRabitMQService,RabitMQPublisherService>(); 
+            services.AddScoped<IRedisCacheService, RedisCacheService>();
 
         }
     }

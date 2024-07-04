@@ -1,5 +1,4 @@
-﻿using CacheNQueue.Application.Abstractions.Cache;
-using CacheNQueue.Application.Cache;
+﻿using CacheNQueue.Application.Abstractions.Cache; 
 using CacheNQueue.Application.Repositories.OrderItemsRepository;
 using CacheNQueue.Application.Repositories.OrderRepository;
 using CacheNQueue.Application.Repositories.ProductRepository;
@@ -28,7 +27,6 @@ namespace CacheNQueue.Persistence
             service.AddScoped<IOrderItemRepository,OrderItemRepository>();
             service.AddScoped<IOrderRepository,OrderRepository>();
             service.AddScoped<IProductRepository,ProductRepository>();
-            service.AddScoped<IRedisCacheService,RedisCacheService>();
 
         }
     }
